@@ -1,0 +1,3 @@
+# Données tabulaires : aucune conversion des fins de ligne,
+# afin que les fichiers restent identiques octet par octet (empreintes SHA-256 stables).
+*.csv -text

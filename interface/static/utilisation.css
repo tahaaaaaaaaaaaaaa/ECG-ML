@@ -1,0 +1,239 @@
+/* Fenêtre 1 : utilisation du modèle. */
+
+.grille-utilisation {
+  display: grid;
+  grid-template-columns: 340px minmax(0, 1fr);
+  gap: 16px;
+  align-items: start;
+}
+.colonne-gauche { position: sticky; top: 74px; }
+.colonne-gauche .carte + .carte, .colonne-droite .carte + .carte { margin-top: 16px; }
+
+.onglet { margin-top: 14px; }
+.filtres { display: grid; grid-template-columns: 1fr 110px; gap: 8px; margin-bottom: 10px; }
+
+.liste-ecg {
+  max-height: 248px;
+  overflow-y: auto;
+  border: 1px solid var(--bord);
+  border-radius: 10px;
+  background: var(--surface-2);
+}
+.liste-ecg button {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  width: 100%;
+  padding: 7px 10px;
+  border: 0;
+  border-bottom: 1px solid var(--bord);
+  background: transparent;
+  cursor: pointer;
+  text-align: left;
+  flex-wrap: wrap;
+}
+.liste-ecg button:last-child { border-bottom: 0; }
+.liste-ecg button:hover { background: var(--surface-3); }
+.liste-ecg button[aria-current="true"] { background: var(--accent-doux); }
+.liste-ecg .id { font-weight: 600; min-width: 74px; font-variant-numeric: tabular-nums; }
+.liste-ecg .pastille { font-size: 0.72rem; padding: 1px 7px; }
+.liste-ecg .plus { padding: 8px 10px; color: var(--texte-3); font-size: 0.8rem; }
+
+.ligne-boutons { display: flex; align-items: center; justify-content: space-between; margin-top: 10px; gap: 8px; }
+
+.depot {
+  display: grid;
+  justify-items: center;
+  gap: 4px;
+  padding: 26px 16px;
+  border: 1.5px dashed var(--bord-fort);
+  border-radius: 12px;
+  background: var(--surface-2);
+  color: var(--texte-2);
+  text-align: center;
+  cursor: pointer;
+  transition: border-color 0.15s, background 0.15s;
+  margin-bottom: 12px;
+}
+.depot input { position: absolute; width: 1px; height: 1px; opacity: 0; }
+.depot:hover, .depot.survol { border-color: var(--accent); background: var(--accent-doux); }
+.depot svg { color: var(--accent); }
+.depot b { color: var(--texte); }
+.depot span { font-size: 0.82rem; }
+
+.ligne-graine { display: flex; align-items: center; gap: 10px; font-size: 0.86rem; color: var(--texte-2); }
+#choix-graine button { min-width: 40px; }
+
+.fiche-modele dl { display: grid; grid-template-columns: auto 1fr; gap: 6px 12px; margin: 0; font-size: 0.86rem; }
+.fiche-modele dt { color: var(--texte-3); }
+.fiche-modele dd { margin: 0; }
+.fiche-titre { font-size: 0.95rem; margin: 18px 0 0; }
+.fiche-sous-titre { margin: 2px 0 6px; }
+.tableau-perf { width: 100%; border-collapse: collapse; font-size: 0.82rem; font-variant-numeric: tabular-nums; }
+.tableau-perf th, .tableau-perf td { padding: 5px 3px; text-align: right; border-top: 1px solid var(--bord); }
+.tableau-perf thead th { border-top: 0; color: var(--texte-3); font-weight: 600; font-size: 0.72rem; cursor: help; }
+.tableau-perf th[scope="row"] { text-align: left; font-weight: 650; }
+.tableau-perf tr.macro th, .tableau-perf tr.macro td { border-top: 2px solid var(--bord-fort); font-weight: 700; }
+.point-classe::before { content: ""; display: inline-block; width: 8px; height: 8px; border-radius: 2px; margin-right: 6px; background: var(--couleur); }
+.fiche-note { font-size: 0.8rem; color: var(--texte-2); margin: 8px 0 0; }
+.definitions { margin-top: 10px; font-size: 0.82rem; color: var(--texte-2); }
+.definitions summary { cursor: pointer; color: var(--accent); font-weight: 600; }
+.definitions p { margin: 6px 0 0; }
+
+/* ---------- Résultat ---------- */
+
+.badges { display: flex; flex-wrap: wrap; gap: 6px; margin-bottom: 16px; }
+
+.sorties { display: grid; gap: 4px; }
+.sortie {
+  display: grid;
+  grid-template-columns: minmax(170px, 1.25fr) minmax(140px, 2fr) 52px 112px 104px 66px;
+  align-items: center;
+  gap: 12px;
+  padding: 10px 12px;
+  border-radius: 11px;
+  border: 1px solid transparent;
+}
+.sortie.retenue { background: var(--surface-2); border-color: var(--bord); }
+.sortie-nom { display: flex; flex-direction: column; min-width: 0; }
+.sortie-nom b { display: flex; align-items: center; gap: 8px; }
+.sortie-nom b::before { content: ""; width: 10px; height: 10px; border-radius: 3px; background: var(--couleur); flex: none; }
+.sortie-nom span { color: var(--texte-2); font-size: 0.8rem; padding-left: 18px; }
+
+.jauge { position: relative; height: 12px; border-radius: 6px; background: var(--surface-3); }
+.jauge .remplissage {
+  position: absolute;
+  inset: 0 auto 0 0;
+  border-radius: 6px;
+  background: var(--couleur);
+  opacity: 0.35;
+  animation: remplir 0.9s cubic-bezier(0.2, 0.8, 0.2, 1) both;
+}
+@keyframes remplir { from { width: 0; } }
+.retenue .jauge .remplissage { opacity: 1; }
+.jauge .seuil {
+  position: absolute;
+  top: -5px;
+  bottom: -5px;
+  width: 2px;
+  margin-left: -1px;
+  background: var(--texte);
+  border-radius: 1px;
+}
+.jauge .seuil::after {
+  content: attr(data-texte);
+  position: absolute;
+  top: 100%;
+  left: 50%;
+  transform: translateX(-50%);
+  font-size: 0.66rem;
+  color: var(--texte-3);
+  white-space: nowrap;
+  padding-top: 1px;
+}
+.sortie-proba { font-weight: 650; text-align: right; font-variant-numeric: tabular-nums; }
+.sortie-annotation { font-size: 0.8rem; color: var(--texte-2); }
+.accord { display: flex; gap: 3px; align-items: center; }
+.accord i { width: 8px; height: 8px; border-radius: 50%; background: var(--eteint); }
+.accord i.oui { background: var(--couleur); }
+.accord i.courant { outline: 1.5px solid var(--texte); outline-offset: 1.5px; }
+
+.entete-sorties {
+  display: grid;
+  grid-template-columns: minmax(170px, 1.25fr) minmax(140px, 2fr) 52px 112px 104px 66px;
+  gap: 12px;
+  padding: 0 12px 4px;
+  font-size: 0.72rem;
+  color: var(--texte-3);
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+}
+.entete-sorties span:nth-child(3) { text-align: right; }
+
+.synthese {
+  margin-top: 16px;
+  padding: 12px 14px;
+  border-radius: 11px;
+  background: var(--surface-2);
+  border: 1px solid var(--bord);
+  font-size: 0.9rem;
+}
+.synthese p:last-child { margin-bottom: 0; }
+.actions { display: flex; gap: 8px; flex-wrap: wrap; margin-top: 14px; }
+
+/* ---------- Tracé ---------- */
+
+.entete-trace { display: flex; align-items: center; justify-content: space-between; gap: 12px; margin-bottom: 10px; flex-wrap: wrap; }
+.cadre-trace { border-radius: 10px; overflow: hidden; border: 1px solid var(--bord); }
+
+/* ---------- Carte de chaleur des entrées ---------- */
+
+.carte-chaleur {
+  display: grid;
+  grid-template-columns: 44px repeat(10, minmax(0, 1fr));
+  gap: 2px;
+  margin: 8px 0 12px;
+  font-size: 0.75rem;
+}
+.carte-chaleur .tete { color: var(--texte-3); text-align: center; padding: 2px 0 4px; font-weight: 600; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+.carte-chaleur .derivation { color: var(--texte-2); font-weight: 650; display: flex; align-items: center; }
+.carte-chaleur .case {
+  height: 28px;
+  border-radius: 4px;
+  display: grid;
+  place-items: center;
+  font-variant-numeric: tabular-nums;
+  cursor: default;
+  transition: transform 0.12s, box-shadow 0.12s;
+}
+.carte-chaleur .case:hover { transform: scale(1.12); box-shadow: 0 2px 8px rgba(0, 0, 0, 0.2); z-index: 1; }
+.carte-chaleur .ligne-active { outline: 2px solid var(--texte); outline-offset: -1px; }
+
+.vide { color: var(--texte-2); }
+
+@media (max-width: 1100px) {
+  .sortie, .entete-sorties { grid-template-columns: minmax(150px, 1fr) minmax(120px, 1.4fr) 48px 104px; }
+  .sortie-annotation, .entete-sorties span:nth-child(5) { display: none; }
+  .accord, .entete-sorties span:nth-child(6) { display: none; }
+}
+
+@media (max-width: 900px) {
+  .grille-utilisation { grid-template-columns: minmax(0, 1fr); }
+  .colonne-gauche { position: static; }
+}
+
+@media (max-width: 560px) {
+  .entete-sorties { display: none; }
+  .sortie { grid-template-columns: 1fr auto; gap: 8px 12px; }
+  .sortie-nom { grid-column: 1 / -1; }
+  .jauge { grid-column: 1; }
+  .sortie-proba { grid-column: 2; }
+  .sortie-decision { grid-column: 1 / -1; }
+  .carte-chaleur { grid-template-columns: 34px repeat(10, minmax(0, 1fr)); font-size: 0.62rem; }
+  .carte-chaleur .case { height: 24px; }
+  .carte-chaleur .case span { display: none; }
+}
+
+#carte-resultat .erreur { margin: 0 0 12px; }
+
+.grille-utilisation { gap: 20px; }
+.colonne-gauche .carte { padding: 20px; }
+.colonne-gauche .carte > h2 { font-size: 1.03rem; }
+.colonne-droite .carte { padding: 24px; }
+.colonne-droite .carte > h2 { font-size: 1.16rem; }
+.fiche-modele { background: linear-gradient(145deg, var(--surface), var(--surface-2)); }
+.segments { max-width: 100%; }
+.segments button { line-height: 1.35; }
+.liste-ecg { scrollbar-color: var(--bord-fort) transparent; }
+.liste-ecg button { min-height: 38px; }
+.cadre-trace { background: var(--papier); }
+.carte-chaleur .case { border: 1px solid color-mix(in srgb, var(--bord) 45%, transparent); }
+
+@media (min-width: 901px) {
+  .grille-utilisation { grid-template-columns: minmax(300px, 0.78fr) minmax(0, 1.82fr); }
+}
+
+@media (max-width: 560px) {
+  .colonne-droite .carte { padding: 17px; }
+  .filtres { grid-template-columns: minmax(0, 1fr) 100px; }
+}

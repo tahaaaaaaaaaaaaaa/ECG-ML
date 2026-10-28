@@ -1,0 +1,115 @@
+{
+  "created_utc": "2026-10-23T18:14:21+00:00",
+  "git_commit": "a0b004d37759bd4a2497d318d25109299dfd6a6c+modifications-non-commitées",
+  "script": "src/data/build_model_input.py",
+  "n_features": 120,
+  "source_classes": [
+    "NORM",
+    "MI",
+    "STTC",
+    "CD",
+    "HYP"
+  ],
+  "binary_classes": [
+    "NORMAL",
+    "PATHOLOGICAL"
+  ],
+  "binary_label_rule": "PATHOLOGICAL si MI, STTC, CD ou HYP est présent ; sinon NORMAL si NORM est présent.",
+  "labels_in_npz": "Y contient les indicateurs des classes source, dans l'ordre source_classes ; train_binary les convertit en classes binaires.",
+  "splits": {
+    "train": {
+      "features_csv": {
+        "path": "data/processed/features_statistical/train_features.csv",
+        "sha256": "b286b867b681f5331599b0a7a2544909eb5768a9c67acf2487661ab08ece6930"
+      },
+      "metadata_csv": {
+        "path": "data/processed/splits/train_metadata.csv",
+        "sha256": "6fa57d4a7baeceacccd07400b9ceb06a4b3a93fe49b007f1a79ebe2a2ea1a1cd"
+      },
+      "npz": {
+        "path": "data/processed/model_input/train.npz",
+        "sha256": "5de0c20ef787c129a993b1a75836bfa518e913264dc6fd6892ce9276b588e598"
+      },
+      "X_shape": [
+        10692,
+        120
+      ],
+      "Y_shape": [
+        10692,
+        5
+      ],
+      "positives": {
+        "NORM": 4764,
+        "MI": 2729,
+        "STTC": 2624,
+        "CD": 2443,
+        "HYP": 1317
+      },
+      "prevalence": {
+        "NORM": 0.4456,
+        "MI": 0.2552,
+        "STTC": 0.2454,
+        "CD": 0.2285,
+        "HYP": 0.1232
+      }
+    },
+    "validation": {
+      "features_csv": {
+        "path": "data/processed/features_statistical/validation_features.csv",
+        "sha256": "9c5e18682e0205ef33137f2f13042051aadc276441840d89296d91ff82a46184"
+      },
+      "metadata_csv": {
+        "path": "data/processed/splits/validation_metadata.csv",
+        "sha256": "db89500fef859ef39f293ecc1c6831b016a7517436dadf1956a0683683f37e23"
+      },
+      "npz": {
+        "path": "data/processed/model_input/validation.npz",
+        "sha256": "ddb1d9f04aa5dbe9b9db85a82949cd5ac6033cbaa83ceeffebd473952278a20a"
+      },
+      "X_shape": [
+        2158,
+        120
+      ],
+      "Y_shape": [
+        2158,
+        5
+      ],
+      "positives": {
+        "NORM": 963,
+        "MI": 550,
+        "STTC": 521,
+        "CD": 496,
+        "HYP": 262
+      },
+      "prevalence": {
+        "NORM": 0.4462,
+        "MI": 0.2549,
+        "STTC": 0.2414,
+        "CD": 0.2298,
+        "HYP": 0.1214
+      }
+    },
+    "test": {
+      "features_csv": {
+        "path": "data/processed/features_statistical/test_features.csv",
+        "sha256": "eac0277e0fe85d097d539d2923f205bfc14490523d8d8748fbb73e52542da192"
+      },
+      "metadata_csv": {
+        "path": "data/processed/splits/test_metadata.csv",
+        "sha256": "74f25bd3a34bc500b2a301bcfa93de26825e92332254d2852846c852adc81ab4"
+      },
+      "npz": {
+        "path": "data/processed/model_input/test.npz",
+        "sha256": "29f59269fa710367850787b40e36b1aa5da9ea280ffd6994c17be2d0b175b1ad"
+      },
+      "X_shape": [
+        2129,
+        120
+      ],
+      "Y_shape": [
+        2129,
+        5
+      ]
+    }
+  }
+}

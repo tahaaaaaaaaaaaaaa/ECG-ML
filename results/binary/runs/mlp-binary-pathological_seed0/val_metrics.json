@@ -1,0 +1,50 @@
+{
+  "run_id": "mlp-binary-pathological_seed0",
+  "best_epoch": 22,
+  "epochs_run": 42,
+  "duration_s": 30.4,
+  "threshold": 0.33,
+  "accuracy": 0.7896200185356812,
+  "auroc_macro": 0.87667861718904,
+  "average_precision_macro": 0.8677620234814962,
+  "f1_macro": 0.7801447850888413,
+  "f1_micro": 0.7896200185356812,
+  "per_class": {
+    "NORMAL": {
+      "precision": 0.7869674185463659,
+      "recall": 0.6885964912280702,
+      "f1": 0.7345029239766082,
+      "support": 912,
+      "confusion_matrix": [
+        [
+          1076,
+          170
+        ],
+        [
+          284,
+          628
+        ]
+      ],
+      "auroc": 0.8766781771845344,
+      "average_precision": 0.8255945520510969
+    },
+    "PATHOLOGICAL": {
+      "precision": 0.7911764705882353,
+      "recall": 0.8635634028892456,
+      "f1": 0.8257866462010744,
+      "support": 1246,
+      "confusion_matrix": [
+        [
+          628,
+          284
+        ],
+        [
+          170,
+          1076
+        ]
+      ],
+      "auroc": 0.8766790571935457,
+      "average_precision": 0.9099294949118957
+    }
+  }
+}

@@ -1,0 +1,24 @@
+# Données brutes PTB-XL (téléchargeables sur PhysioNet) : jamais versionnées
+data/raw/
+
+# Matrices d'apprentissage régénérables (empreintes dans manifest.json)
+data/processed/model_input/*.npz
+
+# Environnement virtuel (reconstruit à partir de requirements*.txt)
+.venv/
+
+# Python
+__pycache__/
+*.py[cod]
+
+# Fichiers temporaires d'écriture
+*.tmp
+
+# Jupyter
+.ipynb_checkpoints/
+
+# Éditeur et système
+.vscode/
+.claude/
+Thumbs.db
+Desktop.ini

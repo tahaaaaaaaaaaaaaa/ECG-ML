@@ -1,0 +1,1735 @@
+{
+  "status": "completed",
+  "task": "binary",
+  "protocol": "nested_5_fold_patient_disjoint",
+  "outer_folds": [
+    1,
+    2,
+    3,
+    4,
+    5
+  ],
+  "test_fold_reserved": [
+    6
+  ],
+  "seed_selection": "all_seeds_in_binary_protocol",
+  "inner_validation": "Pour chaque pli externe, le fold suivant (cyclique) parmi les folds 1 à 5 sert à l'arrêt anticipé et au réglage du seuil.",
+  "preprocessing": "StandardScaler ajusté sur les seules données d'entraînement du pli correspondant.",
+  "selected_seeds": {
+    "0": {
+      "seed": 0,
+      "evaluated_from_configured_seeds": true,
+      "selection_score": 0.8766790571935457,
+      "source_run_id": "mlp-binary-pathological_seed0",
+      "folds": [
+        {
+          "outer_fold": 1,
+          "inner_validation_fold": 2,
+          "n_train_ecg": 8553,
+          "n_inner_train_ecg": 6415,
+          "n_inner_validation_ecg": 2138,
+          "n_test_ecg": 2139,
+          "n_train_patients": 7409,
+          "n_inner_train_patients": 5587,
+          "n_inner_validation_patients": 1822,
+          "n_test_patients": 1854,
+          "best_epoch_from_inner_validation": 22,
+          "inner_early_stopping_auroc_pathological": 0.9073309418239344,
+          "threshold_from_inner_validation": 0.47,
+          "inner_training_duration_s": 22.1,
+          "accuracy": 0.8078541374474053,
+          "auroc_macro": 0.8893242930390572,
+          "average_precision_macro": 0.8705409854919961,
+          "f1_macro": 0.8008912602277388,
+          "f1_micro": 0.8078541374474053,
+          "per_class": {
+            "NORMAL": {
+              "precision": 0.7895362663495838,
+              "recall": 0.7394209354120267,
+              "f1": 0.7636572742955722,
+              "support": 898,
+              "confusion_matrix": [
+                [
+                  1064,
+                  177
+                ],
+                [
+                  234,
+                  664
+                ]
+              ],
+              "auroc": 0.8893171144041105,
+              "average_precision": 0.8213559808000845
+            },
+            "PATHOLOGICAL": {
+              "precision": 0.8197226502311248,
+              "recall": 0.8573730862207897,
+              "f1": 0.8381252461599055,
+              "support": 1241,
+              "confusion_matrix": [
+                [
+                  664,
+                  234
+                ],
+                [
+                  177,
+                  1064
+                ]
+              ],
+              "auroc": 0.889331471674004,
+              "average_precision": 0.9197259901839077
+            }
+          }
+        },
+        {
+          "outer_fold": 2,
+          "inner_validation_fold": 3,
+          "n_train_ecg": 8554,
+          "n_inner_train_ecg": 6404,
+          "n_inner_validation_ecg": 2150,
+          "n_test_ecg": 2138,
+          "n_train_patients": 7441,
+          "n_inner_train_patients": 5577,
+          "n_inner_validation_patients": 1864,
+          "n_test_patients": 1822,
+          "best_epoch_from_inner_validation": 18,
+          "inner_early_stopping_auroc_pathological": 0.8888960673095603,
+          "threshold_from_inner_validation": 0.36,
+          "inner_training_duration_s": 12.8,
+          "accuracy": 0.8166510757717493,
+          "auroc_macro": 0.9038499587798846,
+          "average_precision_macro": 0.8918798713215701,
+          "f1_macro": 0.8100692555930237,
+          "f1_micro": 0.8166510757717493,
+          "per_class": {
+            "NORMAL": {
+              "precision": 0.8269938650306748,
+              "recall": 0.7286486486486486,
+              "f1": 0.774712643678161,
+              "support": 925,
+              "confusion_matrix": [
+                [
+                  1072,
+                  141
+                ],
+                [
+                  251,
+                  674
+                ]
+              ],
+              "auroc": 0.9038426060025401,
+              "average_precision": 0.8577089528158323
+            },
+            "PATHOLOGICAL": {
+              "precision": 0.8102796674225246,
+              "recall": 0.8837592745259687,
+              "f1": 0.8454258675078864,
+              "support": 1213,
+              "confusion_matrix": [
+                [
+                  674,
+                  251
+                ],
+                [
+                  141,
+                  1072
+                ]
+              ],
+              "auroc": 0.9038573115572291,
+              "average_precision": 0.926050789827308
+            }
+          }
+        },
+        {
+          "outer_fold": 3,
+          "inner_validation_fold": 4,
+          "n_train_ecg": 8542,
+          "n_inner_train_ecg": 6412,
+          "n_inner_validation_ecg": 2130,
+          "n_test_ecg": 2150,
+          "n_train_patients": 7399,
+          "n_inner_train_patients": 5541,
+          "n_inner_validation_patients": 1858,
+          "n_test_patients": 1864,
+          "best_epoch_from_inner_validation": 26,
+          "inner_early_stopping_auroc_pathological": 0.893942322964173,
+          "threshold_from_inner_validation": 0.38,
+          "inner_training_duration_s": 25.6,
+          "accuracy": 0.8009302325581396,
+          "auroc_macro": 0.8916363195270329,
+          "average_precision_macro": 0.8808457787956475,
+          "f1_macro": 0.7950558618656018,
+          "f1_micro": 0.8009302325581396,
+          "per_class": {
+            "NORMAL": {
+              "precision": 0.8035502958579882,
+              "recall": 0.7215727948990436,
+              "f1": 0.7603583426651735,
+              "support": 941,
+              "confusion_matrix": [
+                [
+                  1043,
+                  166
+                ],
+                [
+                  262,
+                  679
+                ]
+              ],
+              "auroc": 0.8916292876047426,
+              "average_precision": 0.8397290831801191
+            },
+            "PATHOLOGICAL": {
+              "precision": 0.7992337164750958,
+              "recall": 0.8626964433416047,
+              "f1": 0.8297533810660302,
+              "support": 1209,
+              "confusion_matrix": [
+                [
+                  679,
+                  262
+                ],
+                [
+                  166,
+                  1043
+                ]
+              ],
+              "auroc": 0.8916433514493232,
+              "average_precision": 0.921962474411176
+            }
+          }
+        },
+        {
+          "outer_fold": 4,
+          "inner_validation_fold": 5,
+          "n_train_ecg": 8562,
+          "n_inner_train_ecg": 6427,
+          "n_inner_validation_ecg": 2135,
+          "n_test_ecg": 2130,
+          "n_train_patients": 7405,
+          "n_inner_train_patients": 5540,
+          "n_inner_validation_patients": 1865,
+          "n_test_patients": 1858,
+          "best_epoch_from_inner_validation": 41,
+          "inner_early_stopping_auroc_pathological": 0.8994631712388176,
+          "threshold_from_inner_validation": 0.51,
+          "inner_training_duration_s": 38.3,
+          "accuracy": 0.8154929577464789,
+          "auroc_macro": 0.8944081410387311,
+          "average_precision_macro": 0.8819104144241667,
+          "f1_macro": 0.8121773617952388,
+          "f1_micro": 0.8154929577464789,
+          "per_class": {
+            "NORMAL": {
+              "precision": 0.7557172557172557,
+              "recall": 0.8214689265536723,
+              "f1": 0.787222523010287,
+              "support": 885,
+              "confusion_matrix": [
+                [
+                  1010,
+                  235
+                ],
+                [
+                  158,
+                  727
+                ]
+              ],
+              "auroc": 0.8944083679350168,
+              "average_precision": 0.8336884245420199
+            },
+            "PATHOLOGICAL": {
+              "precision": 0.8647260273972602,
+              "recall": 0.8112449799196787,
+              "f1": 0.8371322005801907,
+              "support": 1245,
+              "confusion_matrix": [
+                [
+                  727,
+                  158
+                ],
+                [
+                  235,
+                  1010
+                ]
+              ],
+              "auroc": 0.8944079141424455,
+              "average_precision": 0.9301324043063136
+            }
+          }
+        },
+        {
+          "outer_fold": 5,
+          "inner_validation_fold": 1,
+          "n_train_ecg": 8557,
+          "n_inner_train_ecg": 6418,
+          "n_inner_validation_ecg": 2139,
+          "n_test_ecg": 2135,
+          "n_train_patients": 7398,
+          "n_inner_train_patients": 5544,
+          "n_inner_validation_patients": 1854,
+          "n_test_patients": 1865,
+          "best_epoch_from_inner_validation": 28,
+          "inner_early_stopping_auroc_pathological": 0.8911368983630917,
+          "threshold_from_inner_validation": 0.37,
+          "inner_training_duration_s": 23.4,
+          "accuracy": 0.8093676814988291,
+          "auroc_macro": 0.901185278954401,
+          "average_precision_macro": 0.8886943112585554,
+          "f1_macro": 0.798117377664514,
+          "f1_micro": 0.8093676814988291,
+          "per_class": {
+            "NORMAL": {
+              "precision": 0.8292682926829268,
+              "recall": 0.6853303471444568,
+              "f1": 0.7504598405885959,
+              "support": 893,
+              "confusion_matrix": [
+                [
+                  1116,
+                  126
+                ],
+                [
+                  281,
+                  612
+                ]
+              ],
+              "auroc": 0.901185278954401,
+              "average_precision": 0.8444770433696841
+            },
+            "PATHOLOGICAL": {
+              "precision": 0.7988546886184682,
+              "recall": 0.8985507246376812,
+              "f1": 0.845774914740432,
+              "support": 1242,
+              "confusion_matrix": [
+                [
+                  612,
+                  281
+                ],
+                [
+                  126,
+                  1116
+                ]
+              ],
+              "auroc": 0.901185278954401,
+              "average_precision": 0.9329115791474266
+            }
+          }
+        }
+      ],
+      "summary": {
+        "auroc_macro": {
+          "mean": 0.8960807982678214,
+          "std": 0.00621725651979096
+        },
+        "average_precision_macro": {
+          "mean": 0.8827742722583871,
+          "std": 0.008247385018375257
+        },
+        "accuracy": {
+          "mean": 0.8100592170045205,
+          "std": 0.006357222166343855
+        },
+        "f1_macro": {
+          "mean": 0.8032622234292234,
+          "std": 0.007504176395890145
+        },
+        "PATHOLOGICAL": {
+          "precision": {
+            "mean": 0.8185633500288947,
+            "std": 0.027216824870899072
+          },
+          "recall": {
+            "mean": 0.8627249017291445,
+            "std": 0.033184181151015346
+          },
+          "f1": {
+            "mean": 0.839242322010889,
+            "std": 0.006645514913226711
+          },
+          "auroc": {
+            "mean": 0.8960850655554806,
+            "std": 0.006216363004306184
+          },
+          "average_precision": {
+            "mean": 0.9261566475752264,
+            "std": 0.0054861505403891835
+          }
+        }
+      }
+    },
+    "1": {
+      "seed": 1,
+      "evaluated_from_configured_seeds": true,
+      "selection_score": 0.8793547245923798,
+      "source_run_id": "mlp-binary-pathological_seed1",
+      "folds": [
+        {
+          "outer_fold": 1,
+          "inner_validation_fold": 2,
+          "n_train_ecg": 8553,
+          "n_inner_train_ecg": 6415,
+          "n_inner_validation_ecg": 2138,
+          "n_test_ecg": 2139,
+          "n_train_patients": 7409,
+          "n_inner_train_patients": 5587,
+          "n_inner_validation_patients": 1822,
+          "n_test_patients": 1854,
+          "best_epoch_from_inner_validation": 15,
+          "inner_early_stopping_auroc_pathological": 0.9047356342327487,
+          "threshold_from_inner_validation": 0.5,
+          "inner_training_duration_s": 16.5,
+          "accuracy": 0.814866760168303,
+          "auroc_macro": 0.886983609381758,
+          "average_precision_macro": 0.8623321675055525,
+          "f1_macro": 0.8126048650294153,
+          "f1_micro": 0.814866760168303,
+          "per_class": {
+            "NORMAL": {
+              "precision": 0.7495029821073559,
+              "recall": 0.8396436525612472,
+              "f1": 0.792016806722689,
+              "support": 898,
+              "confusion_matrix": [
+                [
+                  989,
+                  252
+                ],
+                [
+                  144,
+                  754
+                ]
+              ],
+              "auroc": 0.8869840580464423,
+              "average_precision": 0.8059132658157911
+            },
+            "PATHOLOGICAL": {
+              "precision": 0.8729037952338923,
+              "recall": 0.7969379532634971,
+              "f1": 0.8331929233361416,
+              "support": 1241,
+              "confusion_matrix": [
+                [
+                  754,
+                  144
+                ],
+                [
+                  252,
+                  989
+                ]
+              ],
+              "auroc": 0.8869831607170737,
+              "average_precision": 0.9187510691953139
+            }
+          }
+        },
+        {
+          "outer_fold": 2,
+          "inner_validation_fold": 3,
+          "n_train_ecg": 8554,
+          "n_inner_train_ecg": 6404,
+          "n_inner_validation_ecg": 2150,
+          "n_test_ecg": 2138,
+          "n_train_patients": 7441,
+          "n_inner_train_patients": 5577,
+          "n_inner_validation_patients": 1864,
+          "n_test_patients": 1822,
+          "best_epoch_from_inner_validation": 26,
+          "inner_early_stopping_auroc_pathological": 0.8898440583333114,
+          "threshold_from_inner_validation": 0.45,
+          "inner_training_duration_s": 19.0,
+          "accuracy": 0.8246024321796072,
+          "auroc_macro": 0.905277066019028,
+          "average_precision_macro": 0.8981130699327526,
+          "f1_macro": 0.821474497072449,
+          "f1_micro": 0.8246024321796072,
+          "per_class": {
+            "NORMAL": {
+              "precision": 0.7956989247311828,
+              "recall": 0.8,
+              "f1": 0.7978436657681941,
+              "support": 925,
+              "confusion_matrix": [
+                [
+                  1023,
+                  190
+                ],
+                [
+                  185,
+                  740
+                ]
+              ],
+              "auroc": 0.9052694904302487,
+              "average_precision": 0.8701415285143681
+            },
+            "PATHOLOGICAL": {
+              "precision": 0.8468543046357616,
+              "recall": 0.843363561417972,
+              "f1": 0.8451053283767038,
+              "support": 1213,
+              "confusion_matrix": [
+                [
+                  740,
+                  185
+                ],
+                [
+                  190,
+                  1023
+                ]
+              ],
+              "auroc": 0.9052846416078073,
+              "average_precision": 0.9260846113511372
+            }
+          }
+        },
+        {
+          "outer_fold": 3,
+          "inner_validation_fold": 4,
+          "n_train_ecg": 8542,
+          "n_inner_train_ecg": 6412,
+          "n_inner_validation_ecg": 2130,
+          "n_test_ecg": 2150,
+          "n_train_patients": 7399,
+          "n_inner_train_patients": 5541,
+          "n_inner_validation_patients": 1858,
+          "n_test_patients": 1864,
+          "best_epoch_from_inner_validation": 23,
+          "inner_early_stopping_auroc_pathological": 0.8950722664669981,
+          "threshold_from_inner_validation": 0.42,
+          "inner_training_duration_s": 18.4,
+          "accuracy": 0.793953488372093,
+          "auroc_macro": 0.890597792503795,
+          "average_precision_macro": 0.878419955952455,
+          "f1_macro": 0.7861382946165321,
+          "f1_micro": 0.793953488372093,
+          "per_class": {
+            "NORMAL": {
+              "precision": 0.8120300751879699,
+              "recall": 0.6886291179596175,
+              "f1": 0.7452558941920644,
+              "support": 941,
+              "confusion_matrix": [
+                [
+                  1059,
+                  150
+                ],
+                [
+                  293,
+                  648
+                ]
+              ],
+              "auroc": 0.8905929580572204,
+              "average_precision": 0.8364897730032101
+            },
+            "PATHOLOGICAL": {
+              "precision": 0.783284023668639,
+              "recall": 0.8759305210918115,
+              "f1": 0.8270206950409996,
+              "support": 1209,
+              "confusion_matrix": [
+                [
+                  648,
+                  293
+                ],
+                [
+                  150,
+                  1059
+                ]
+              ],
+              "auroc": 0.8906026269503696,
+              "average_precision": 0.9203501389016999
+            }
+          }
+        },
+        {
+          "outer_fold": 4,
+          "inner_validation_fold": 5,
+          "n_train_ecg": 8562,
+          "n_inner_train_ecg": 6427,
+          "n_inner_validation_ecg": 2135,
+          "n_test_ecg": 2130,
+          "n_train_patients": 7405,
+          "n_inner_train_patients": 5540,
+          "n_inner_validation_patients": 1865,
+          "n_test_patients": 1858,
+          "best_epoch_from_inner_validation": 14,
+          "inner_early_stopping_auroc_pathological": 0.8981062224891039,
+          "threshold_from_inner_validation": 0.37,
+          "inner_training_duration_s": 15.3,
+          "accuracy": 0.8051643192488263,
+          "auroc_macro": 0.8984775259229008,
+          "average_precision_macro": 0.8914931570102447,
+          "f1_macro": 0.7929670876339788,
+          "f1_micro": 0.8051643192488263,
+          "per_class": {
+            "NORMAL": {
+              "precision": 0.8228021978021978,
+              "recall": 0.6768361581920904,
+              "f1": 0.7427154370737755,
+              "support": 885,
+              "confusion_matrix": [
+                [
+                  1116,
+                  129
+                ],
+                [
+                  286,
+                  599
+                ]
+              ],
+              "auroc": 0.8984775259229008,
+              "average_precision": 0.8496776142033403
+            },
+            "PATHOLOGICAL": {
+              "precision": 0.7960057061340942,
+              "recall": 0.8963855421686747,
+              "f1": 0.8432187381941821,
+              "support": 1245,
+              "confusion_matrix": [
+                [
+                  599,
+                  286
+                ],
+                [
+                  129,
+                  1116
+                ]
+              ],
+              "auroc": 0.8984775259229006,
+              "average_precision": 0.9333086998171491
+            }
+          }
+        },
+        {
+          "outer_fold": 5,
+          "inner_validation_fold": 1,
+          "n_train_ecg": 8557,
+          "n_inner_train_ecg": 6418,
+          "n_inner_validation_ecg": 2139,
+          "n_test_ecg": 2135,
+          "n_train_patients": 7398,
+          "n_inner_train_patients": 5544,
+          "n_inner_validation_patients": 1854,
+          "n_test_patients": 1865,
+          "best_epoch_from_inner_validation": 19,
+          "inner_early_stopping_auroc_pathological": 0.8916510680911471,
+          "threshold_from_inner_validation": 0.41,
+          "inner_training_duration_s": 14.9,
+          "accuracy": 0.8163934426229508,
+          "auroc_macro": 0.9009722695576436,
+          "average_precision_macro": 0.8898552796651945,
+          "f1_macro": 0.8060519431884122,
+          "f1_micro": 0.8163934426229508,
+          "per_class": {
+            "NORMAL": {
+              "precision": 0.8344459279038718,
+              "recall": 0.6998880179171333,
+              "f1": 0.761266747868453,
+              "support": 893,
+              "confusion_matrix": [
+                [
+                  1118,
+                  124
+                ],
+                [
+                  268,
+                  625
+                ]
+              ],
+              "auroc": 0.9009720441508747,
+              "average_precision": 0.8478041327126531
+            },
+            "PATHOLOGICAL": {
+              "precision": 0.8066378066378066,
+              "recall": 0.9001610305958132,
+              "f1": 0.8508371385083714,
+              "support": 1242,
+              "confusion_matrix": [
+                [
+                  625,
+                  268
+                ],
+                [
+                  124,
+                  1118
+                ]
+              ],
+              "auroc": 0.9009724949644127,
+              "average_precision": 0.9319064266177359
+            }
+          }
+        }
+      ],
+      "summary": {
+        "auroc_macro": {
+          "mean": 0.896461652677025,
+          "std": 0.00752228493902738
+        },
+        "average_precision_macro": {
+          "mean": 0.88404272601324,
+          "std": 0.014055543158159389
+        },
+        "accuracy": {
+          "mean": 0.8109960885183559,
+          "std": 0.011765477792450607
+        },
+        "f1_macro": {
+          "mean": 0.8038473375081574,
+          "std": 0.014354976195190883
+        },
+        "PATHOLOGICAL": {
+          "precision": {
+            "mean": 0.8211371272620388,
+            "std": 0.0374694448954968
+          },
+          "recall": {
+            "mean": 0.8625557217075537,
+            "std": 0.043045126959218784
+          },
+          "f1": {
+            "mean": 0.8398749646912798,
+            "std": 0.009599332076120376
+          },
+          "auroc": {
+            "mean": 0.8964640900325127,
+            "std": 0.007523738089453785
+          },
+          "average_precision": {
+            "mean": 0.9260801891766072,
+            "std": 0.006571641807981159
+          }
+        }
+      }
+    },
+    "2": {
+      "seed": 2,
+      "selected_by": "validation_auroc_pathological",
+      "selection_score": 0.8799958111571062,
+      "source_run_id": "mlp-binary-pathological_seed2",
+      "folds": [
+        {
+          "outer_fold": 1,
+          "inner_validation_fold": 2,
+          "n_train_ecg": 8553,
+          "n_inner_train_ecg": 6415,
+          "n_inner_validation_ecg": 2138,
+          "n_test_ecg": 2139,
+          "n_train_patients": 7409,
+          "n_inner_train_patients": 5587,
+          "n_inner_validation_patients": 1822,
+          "n_test_patients": 1854,
+          "best_epoch_from_inner_validation": 24,
+          "inner_early_stopping_auroc_pathological": 0.9049428488670039,
+          "threshold_from_inner_validation": 0.48,
+          "inner_training_duration_s": 24.6,
+          "accuracy": 0.8101916783543712,
+          "auroc_macro": 0.8908457149830673,
+          "average_precision_macro": 0.871939908308901,
+          "f1_macro": 0.8044345939947286,
+          "f1_micro": 0.8101916783543712,
+          "per_class": {
+            "NORMAL": {
+              "precision": 0.7814645308924485,
+              "recall": 0.7605790645879733,
+              "f1": 0.7708803611738149,
+              "support": 898,
+              "confusion_matrix": [
+                [
+                  1050,
+                  191
+                ],
+                [
+                  215,
+                  683
+                ]
+              ],
+              "auroc": 0.8908380876834365,
+              "average_precision": 0.8206077024183583
+            },
+            "PATHOLOGICAL": {
+              "precision": 0.8300395256916996,
+              "recall": 0.8460918614020951,
+              "f1": 0.8379888268156425,
+              "support": 1241,
+              "confusion_matrix": [
+                [
+                  683,
+                  215
+                ],
+                [
+                  191,
+                  1050
+                ]
+              ],
+              "auroc": 0.8908533422826982,
+              "average_precision": 0.9232721141994438
+            }
+          }
+        },
+        {
+          "outer_fold": 2,
+          "inner_validation_fold": 3,
+          "n_train_ecg": 8554,
+          "n_inner_train_ecg": 6404,
+          "n_inner_validation_ecg": 2150,
+          "n_test_ecg": 2138,
+          "n_train_patients": 7441,
+          "n_inner_train_patients": 5577,
+          "n_inner_validation_patients": 1864,
+          "n_test_patients": 1822,
+          "best_epoch_from_inner_validation": 28,
+          "inner_early_stopping_auroc_pathological": 0.889568494878563,
+          "threshold_from_inner_validation": 0.48,
+          "inner_training_duration_s": 16.6,
+          "accuracy": 0.8283442469597755,
+          "auroc_macro": 0.9069784541342663,
+          "average_precision_macro": 0.897182747458658,
+          "f1_macro": 0.8247783227360134,
+          "f1_micro": 0.8283442469597755,
+          "per_class": {
+            "NORMAL": {
+              "precision": 0.8072687224669604,
+              "recall": 0.7924324324324324,
+              "f1": 0.7997817785051827,
+              "support": 925,
+              "confusion_matrix": [
+                [
+                  1038,
+                  175
+                ],
+                [
+                  192,
+                  733
+                ]
+              ],
+              "auroc": 0.906970878545487,
+              "average_precision": 0.8655608750364244
+            },
+            "PATHOLOGICAL": {
+              "precision": 0.8439024390243902,
+              "recall": 0.8557295960428689,
+              "f1": 0.849774866966844,
+              "support": 1213,
+              "confusion_matrix": [
+                [
+                  733,
+                  192
+                ],
+                [
+                  175,
+                  1038
+                ]
+              ],
+              "auroc": 0.9069860297230454,
+              "average_precision": 0.9288046198808915
+            }
+          }
+        },
+        {
+          "outer_fold": 3,
+          "inner_validation_fold": 4,
+          "n_train_ecg": 8542,
+          "n_inner_train_ecg": 6412,
+          "n_inner_validation_ecg": 2130,
+          "n_test_ecg": 2150,
+          "n_train_patients": 7399,
+          "n_inner_train_patients": 5541,
+          "n_inner_validation_patients": 1858,
+          "n_test_patients": 1864,
+          "best_epoch_from_inner_validation": 19,
+          "inner_early_stopping_auroc_pathological": 0.8948535384475756,
+          "threshold_from_inner_validation": 0.5,
+          "inner_training_duration_s": 12.5,
+          "accuracy": 0.8065116279069767,
+          "auroc_macro": 0.8866583777882671,
+          "average_precision_macro": 0.8739461770481989,
+          "f1_macro": 0.8031733456570058,
+          "f1_micro": 0.8065116279069767,
+          "per_class": {
+            "NORMAL": {
+              "precision": 0.7825618945102261,
+              "recall": 0.7725823591923485,
+              "f1": 0.7775401069518717,
+              "support": 941,
+              "confusion_matrix": [
+                [
+                  1007,
+                  202
+                ],
+                [
+                  214,
+                  727
+                ]
+              ],
+              "auroc": 0.8866550815746935,
+              "average_precision": 0.8299822786917967
+            },
+            "PATHOLOGICAL": {
+              "precision": 0.8247338247338247,
+              "recall": 0.8329197684036393,
+              "f1": 0.8288065843621399,
+              "support": 1209,
+              "confusion_matrix": [
+                [
+                  727,
+                  214
+                ],
+                [
+                  202,
+                  1007
+                ]
+              ],
+              "auroc": 0.8866616740018407,
+              "average_precision": 0.917910075404601
+            }
+          }
+        },
+        {
+          "outer_fold": 4,
+          "inner_validation_fold": 5,
+          "n_train_ecg": 8562,
+          "n_inner_train_ecg": 6427,
+          "n_inner_validation_ecg": 2135,
+          "n_test_ecg": 2130,
+          "n_train_patients": 7405,
+          "n_inner_train_patients": 5540,
+          "n_inner_validation_patients": 1865,
+          "n_test_patients": 1858,
+          "best_epoch_from_inner_validation": 31,
+          "inner_early_stopping_auroc_pathological": 0.9003314381132191,
+          "threshold_from_inner_validation": 0.38,
+          "inner_training_duration_s": 20.1,
+          "accuracy": 0.8061032863849765,
+          "auroc_macro": 0.8956349692555532,
+          "average_precision_macro": 0.8860690871375465,
+          "f1_macro": 0.7997636834067829,
+          "f1_micro": 0.8061032863849765,
+          "per_class": {
+            "NORMAL": {
+              "precision": 0.7725173210161663,
+              "recall": 0.7559322033898305,
+              "f1": 0.7641347801256425,
+              "support": 885,
+              "confusion_matrix": [
+                [
+                  1048,
+                  197
+                ],
+                [
+                  216,
+                  669
+                ]
+              ],
+              "auroc": 0.8956349692555533,
+              "average_precision": 0.8404504626186307
+            },
+            "PATHOLOGICAL": {
+              "precision": 0.8291139240506329,
+              "recall": 0.8417670682730923,
+              "f1": 0.8353925866879235,
+              "support": 1245,
+              "confusion_matrix": [
+                [
+                  669,
+                  216
+                ],
+                [
+                  197,
+                  1048
+                ]
+              ],
+              "auroc": 0.8956349692555532,
+              "average_precision": 0.9316877116564625
+            }
+          }
+        },
+        {
+          "outer_fold": 5,
+          "inner_validation_fold": 1,
+          "n_train_ecg": 8557,
+          "n_inner_train_ecg": 6418,
+          "n_inner_validation_ecg": 2139,
+          "n_test_ecg": 2135,
+          "n_train_patients": 7398,
+          "n_inner_train_patients": 5544,
+          "n_inner_validation_patients": 1854,
+          "n_test_patients": 1865,
+          "best_epoch_from_inner_validation": 43,
+          "inner_early_stopping_auroc_pathological": 0.8898294894734292,
+          "threshold_from_inner_validation": 0.33,
+          "inner_training_duration_s": 26.8,
+          "accuracy": 0.8135831381733021,
+          "auroc_macro": 0.9017406812333537,
+          "average_precision_macro": 0.8859706868096366,
+          "f1_macro": 0.8028113646447713,
+          "f1_micro": 0.8135831381733021,
+          "per_class": {
+            "NORMAL": {
+              "precision": 0.8331090174966352,
+              "recall": 0.6931690929451287,
+              "f1": 0.7567237163814181,
+              "support": 893,
+              "confusion_matrix": [
+                [
+                  1118,
+                  124
+                ],
+                [
+                  274,
+                  619
+                ]
+              ],
+              "auroc": 0.9017406812333537,
+              "average_precision": 0.8388216099408596
+            },
+            "PATHOLOGICAL": {
+              "precision": 0.8031609195402298,
+              "recall": 0.9001610305958132,
+              "f1": 0.8488990129081245,
+              "support": 1242,
+              "confusion_matrix": [
+                [
+                  619,
+                  274
+                ],
+                [
+                  124,
+                  1118
+                ]
+              ],
+              "auroc": 0.9017406812333538,
+              "average_precision": 0.9331197636784136
+            }
+          }
+        }
+      ],
+      "summary": {
+        "auroc_macro": {
+          "mean": 0.8963716394789015,
+          "std": 0.008166350220825196
+        },
+        "average_precision_macro": {
+          "mean": 0.8830217213525883,
+          "std": 0.010291860626572329
+        },
+        "accuracy": {
+          "mean": 0.8129467955558803,
+          "std": 0.009128555648319337
+        },
+        "f1_macro": {
+          "mean": 0.8069922620878603,
+          "std": 0.010089623324713458
+        },
+        "PATHOLOGICAL": {
+          "precision": {
+            "mean": 0.8261901266081555,
+            "std": 0.014744131622834784
+          },
+          "recall": {
+            "mean": 0.8553338649435018,
+            "std": 0.026369943631797236
+          },
+          "f1": {
+            "mean": 0.840172375548135,
+            "std": 0.009016062291241115
+          },
+          "auroc": {
+            "mean": 0.8963753392992982,
+            "std": 0.008166540542083614
+          },
+          "average_precision": {
+            "mean": 0.9269588569639625,
+            "std": 0.006308688431703339
+          }
+        }
+      }
+    },
+    "3": {
+      "seed": 3,
+      "selected_by": "validation_auroc_pathological",
+      "selection_score": 0.8809519409478753,
+      "source_run_id": "mlp-binary-pathological_seed3",
+      "folds": [
+        {
+          "outer_fold": 1,
+          "inner_validation_fold": 2,
+          "n_train_ecg": 8553,
+          "n_inner_train_ecg": 6415,
+          "n_inner_validation_ecg": 2138,
+          "n_test_ecg": 2139,
+          "n_train_patients": 7409,
+          "n_inner_train_patients": 5587,
+          "n_inner_validation_patients": 1822,
+          "n_test_patients": 1854,
+          "best_epoch_from_inner_validation": 35,
+          "inner_early_stopping_auroc_pathological": 0.9050760901049443,
+          "threshold_from_inner_validation": 0.41,
+          "inner_training_duration_s": 18.4,
+          "accuracy": 0.8045815801776531,
+          "auroc_macro": 0.8908636615704342,
+          "average_precision_macro": 0.8768233610321008,
+          "f1_macro": 0.7976097129011579,
+          "f1_micro": 0.8045815801776531,
+          "per_class": {
+            "NORMAL": {
+              "precision": 0.7843601895734598,
+              "recall": 0.7371937639198218,
+              "f1": 0.7600459242250287,
+              "support": 898,
+              "confusion_matrix": [
+                [
+                  1059,
+                  182
+                ],
+                [
+                  236,
+                  662
+                ]
+              ],
+              "auroc": 0.8908560342708033,
+              "average_precision": 0.8288109839557674
+            },
+            "PATHOLOGICAL": {
+              "precision": 0.8177606177606178,
+              "recall": 0.8533440773569702,
+              "f1": 0.8351735015772871,
+              "support": 1241,
+              "confusion_matrix": [
+                [
+                  662,
+                  236
+                ],
+                [
+                  182,
+                  1059
+                ]
+              ],
+              "auroc": 0.890871288870065,
+              "average_precision": 0.9248357381084342
+            }
+          }
+        },
+        {
+          "outer_fold": 2,
+          "inner_validation_fold": 3,
+          "n_train_ecg": 8554,
+          "n_inner_train_ecg": 6404,
+          "n_inner_validation_ecg": 2150,
+          "n_test_ecg": 2138,
+          "n_train_patients": 7441,
+          "n_inner_train_patients": 5577,
+          "n_inner_validation_patients": 1864,
+          "n_test_patients": 1822,
+          "best_epoch_from_inner_validation": 34,
+          "inner_early_stopping_auroc_pathological": 0.8921536053105077,
+          "threshold_from_inner_validation": 0.4,
+          "inner_training_duration_s": 12.8,
+          "accuracy": 0.8306828811973808,
+          "auroc_macro": 0.906769234197099,
+          "average_precision_macro": 0.8999588869338168,
+          "f1_macro": 0.8264473410400477,
+          "f1_micro": 0.8306828811973808,
+          "per_class": {
+            "NORMAL": {
+              "precision": 0.820250284414107,
+              "recall": 0.7794594594594595,
+              "f1": 0.7993348115299335,
+              "support": 925,
+              "confusion_matrix": [
+                [
+                  1055,
+                  158
+                ],
+                [
+                  204,
+                  721
+                ]
+              ],
+              "auroc": 0.9067569795681913,
+              "average_precision": 0.8720427865658149
+            },
+            "PATHOLOGICAL": {
+              "precision": 0.8379666401906275,
+              "recall": 0.8697444352844188,
+              "f1": 0.8535598705501618,
+              "support": 1213,
+              "confusion_matrix": [
+                [
+                  721,
+                  204
+                ],
+                [
+                  158,
+                  1055
+                ]
+              ],
+              "auroc": 0.9067814888260066,
+              "average_precision": 0.9278749873018186
+            }
+          }
+        },
+        {
+          "outer_fold": 3,
+          "inner_validation_fold": 4,
+          "n_train_ecg": 8542,
+          "n_inner_train_ecg": 6412,
+          "n_inner_validation_ecg": 2130,
+          "n_test_ecg": 2150,
+          "n_train_patients": 7399,
+          "n_inner_train_patients": 5541,
+          "n_inner_validation_patients": 1858,
+          "n_test_patients": 1864,
+          "best_epoch_from_inner_validation": 18,
+          "inner_early_stopping_auroc_pathological": 0.8964517958841014,
+          "threshold_from_inner_validation": 0.42,
+          "inner_training_duration_s": 8.6,
+          "accuracy": 0.7972093023255814,
+          "auroc_macro": 0.8875501134336965,
+          "average_precision_macro": 0.8749787148214134,
+          "f1_macro": 0.7905271992856383,
+          "f1_micro": 0.7972093023255814,
+          "per_class": {
+            "NORMAL": {
+              "precision": 0.806060606060606,
+              "recall": 0.7066950053134963,
+              "f1": 0.753114382785957,
+              "support": 941,
+              "confusion_matrix": [
+                [
+                  1049,
+                  160
+                ],
+                [
+                  276,
+                  665
+                ]
+              ],
+              "auroc": 0.8875446197444071,
+              "average_precision": 0.8310091886480528
+            },
+            "PATHOLOGICAL": {
+              "precision": 0.7916981132075471,
+              "recall": 0.8676592224979321,
+              "f1": 0.8279400157853196,
+              "support": 1209,
+              "confusion_matrix": [
+                [
+                  665,
+                  276
+                ],
+                [
+                  160,
+                  1049
+                ]
+              ],
+              "auroc": 0.8875556071229858,
+              "average_precision": 0.918948240994774
+            }
+          }
+        },
+        {
+          "outer_fold": 4,
+          "inner_validation_fold": 5,
+          "n_train_ecg": 8562,
+          "n_inner_train_ecg": 6427,
+          "n_inner_validation_ecg": 2135,
+          "n_test_ecg": 2130,
+          "n_train_patients": 7405,
+          "n_inner_train_patients": 5540,
+          "n_inner_validation_patients": 1865,
+          "n_test_patients": 1858,
+          "best_epoch_from_inner_validation": 17,
+          "inner_early_stopping_auroc_pathological": 0.8970017293207322,
+          "threshold_from_inner_validation": 0.43,
+          "inner_training_duration_s": 8.1,
+          "accuracy": 0.8131455399061033,
+          "auroc_macro": 0.8969663966600867,
+          "average_precision_macro": 0.8904458937575721,
+          "f1_macro": 0.8061725538470543,
+          "f1_micro": 0.8131455399061033,
+          "per_class": {
+            "NORMAL": {
+              "precision": 0.7895362663495838,
+              "recall": 0.7502824858757062,
+              "f1": 0.7694090382387022,
+              "support": 885,
+              "confusion_matrix": [
+                [
+                  1068,
+                  177
+                ],
+                [
+                  221,
+                  664
+                ]
+              ],
+              "auroc": 0.8969663966600866,
+              "average_precision": 0.848477833614106
+            },
+            "PATHOLOGICAL": {
+              "precision": 0.8285492629945694,
+              "recall": 0.8578313253012049,
+              "f1": 0.8429360694554064,
+              "support": 1245,
+              "confusion_matrix": [
+                [
+                  664,
+                  221
+                ],
+                [
+                  177,
+                  1068
+                ]
+              ],
+              "auroc": 0.8969663966600867,
+              "average_precision": 0.9324139539010381
+            }
+          }
+        },
+        {
+          "outer_fold": 5,
+          "inner_validation_fold": 1,
+          "n_train_ecg": 8557,
+          "n_inner_train_ecg": 6418,
+          "n_inner_validation_ecg": 2139,
+          "n_test_ecg": 2135,
+          "n_train_patients": 7398,
+          "n_inner_train_patients": 5544,
+          "n_inner_validation_patients": 1854,
+          "n_test_patients": 1865,
+          "best_epoch_from_inner_validation": 41,
+          "inner_early_stopping_auroc_pathological": 0.8892309707847506,
+          "threshold_from_inner_validation": 0.45,
+          "inner_training_duration_s": 39.7,
+          "accuracy": 0.8257611241217798,
+          "auroc_macro": 0.9034222157305072,
+          "average_precision_macro": 0.8898789140489696,
+          "f1_macro": 0.8208068227968053,
+          "f1_micro": 0.8257611241217798,
+          "per_class": {
+            "NORMAL": {
+              "precision": 0.7936865839909808,
+              "recall": 0.7883538633818589,
+              "f1": 0.7910112359550562,
+              "support": 893,
+              "confusion_matrix": [
+                [
+                  1059,
+                  183
+                ],
+                [
+                  189,
+                  704
+                ]
+              ],
+              "auroc": 0.9034222157305073,
+              "average_precision": 0.8461338888867873
+            },
+            "PATHOLOGICAL": {
+              "precision": 0.8485576923076923,
+              "recall": 0.8526570048309179,
+              "f1": 0.8506024096385543,
+              "support": 1242,
+              "confusion_matrix": [
+                [
+                  704,
+                  189
+                ],
+                [
+                  183,
+                  1059
+                ]
+              ],
+              "auroc": 0.9034222157305072,
+              "average_precision": 0.9336239392111518
+            }
+          }
+        }
+      ],
+      "summary": {
+        "auroc_macro": {
+          "mean": 0.8971143243183647,
+          "std": 0.008117474608225109
+        },
+        "average_precision_macro": {
+          "mean": 0.8864171541187746,
+          "std": 0.010421993713714736
+        },
+        "accuracy": {
+          "mean": 0.8142760855456996,
+          "std": 0.01403233508638953
+        },
+        "f1_macro": {
+          "mean": 0.8083127259741406,
+          "std": 0.015169265837246105
+        },
+        "PATHOLOGICAL": {
+          "precision": {
+            "mean": 0.8249064652922108,
+            "std": 0.02177772065632182
+          },
+          "recall": {
+            "mean": 0.8602472130542888,
+            "std": 0.008003689321905821
+          },
+          "f1": {
+            "mean": 0.8420423734013459,
+            "std": 0.010639355526275896
+          },
+          "auroc": {
+            "mean": 0.8971193994419302,
+            "std": 0.008118033683147055
+          },
+          "average_precision": {
+            "mean": 0.9275393719034433,
+            "std": 0.005958466930686644
+          }
+        }
+      }
+    },
+    "4": {
+      "seed": 4,
+      "evaluated_from_configured_seeds": true,
+      "selection_score": 0.879481445890006,
+      "source_run_id": "mlp-binary-pathological_seed4",
+      "folds": [
+        {
+          "outer_fold": 1,
+          "inner_validation_fold": 2,
+          "n_train_ecg": 8553,
+          "n_inner_train_ecg": 6415,
+          "n_inner_validation_ecg": 2138,
+          "n_test_ecg": 2139,
+          "n_train_patients": 7409,
+          "n_inner_train_patients": 5587,
+          "n_inner_validation_patients": 1822,
+          "n_test_patients": 1854,
+          "best_epoch_from_inner_validation": 18,
+          "inner_early_stopping_auroc_pathological": 0.9070056371292976,
+          "threshold_from_inner_validation": 0.38,
+          "inner_training_duration_s": 14.2,
+          "accuracy": 0.8055165965404395,
+          "auroc_macro": 0.8890948010531057,
+          "average_precision_macro": 0.8697085413736356,
+          "f1_macro": 0.7962995181645199,
+          "f1_micro": 0.8055165965404395,
+          "per_class": {
+            "NORMAL": {
+              "precision": 0.806615776081425,
+              "recall": 0.7060133630289532,
+              "f1": 0.7529691211401425,
+              "support": 898,
+              "confusion_matrix": [
+                [
+                  1089,
+                  152
+                ],
+                [
+                  264,
+                  634
+                ]
+              ],
+              "auroc": 0.8890909874032903,
+              "average_precision": 0.8173737076944524
+            },
+            "PATHOLOGICAL": {
+              "precision": 0.8048780487804879,
+              "recall": 0.8775181305398871,
+              "f1": 0.8396299151888974,
+              "support": 1241,
+              "confusion_matrix": [
+                [
+                  634,
+                  264
+                ],
+                [
+                  152,
+                  1089
+                ]
+              ],
+              "auroc": 0.8890986147029212,
+              "average_precision": 0.9220433750528187
+            }
+          }
+        },
+        {
+          "outer_fold": 2,
+          "inner_validation_fold": 3,
+          "n_train_ecg": 8554,
+          "n_inner_train_ecg": 6404,
+          "n_inner_validation_ecg": 2150,
+          "n_test_ecg": 2138,
+          "n_train_patients": 7441,
+          "n_inner_train_patients": 5577,
+          "n_inner_validation_patients": 1864,
+          "n_test_patients": 1822,
+          "best_epoch_from_inner_validation": 27,
+          "inner_early_stopping_auroc_pathological": 0.8884482217587013,
+          "threshold_from_inner_validation": 0.37,
+          "inner_training_duration_s": 18.1,
+          "accuracy": 0.8213283442469598,
+          "auroc_macro": 0.9072661036964417,
+          "average_precision_macro": 0.9005009785877478,
+          "f1_macro": 0.8140136288652844,
+          "f1_micro": 0.8213283442469598,
+          "per_class": {
+            "NORMAL": {
+              "precision": 0.844106463878327,
+              "recall": 0.72,
+              "f1": 0.7771295215869312,
+              "support": 925,
+              "confusion_matrix": [
+                [
+                  1090,
+                  123
+                ],
+                [
+                  259,
+                  666
+                ]
+              ],
+              "auroc": 0.907256077181881,
+              "average_precision": 0.872933622663142
+            },
+            "PATHOLOGICAL": {
+              "precision": 0.8080059303187547,
+              "recall": 0.8985985160758451,
+              "f1": 0.8508977361436377,
+              "support": 1213,
+              "confusion_matrix": [
+                [
+                  666,
+                  259
+                ],
+                [
+                  123,
+                  1090
+                ]
+              ],
+              "auroc": 0.9072761302110024,
+              "average_precision": 0.9280683345123535
+            }
+          }
+        },
+        {
+          "outer_fold": 3,
+          "inner_validation_fold": 4,
+          "n_train_ecg": 8542,
+          "n_inner_train_ecg": 6412,
+          "n_inner_validation_ecg": 2130,
+          "n_test_ecg": 2150,
+          "n_train_patients": 7399,
+          "n_inner_train_patients": 5541,
+          "n_inner_validation_patients": 1858,
+          "n_test_patients": 1864,
+          "best_epoch_from_inner_validation": 19,
+          "inner_early_stopping_auroc_pathological": 0.8946466090350101,
+          "threshold_from_inner_validation": 0.34,
+          "inner_training_duration_s": 14.8,
+          "accuracy": 0.7972093023255814,
+          "auroc_macro": 0.892681878472561,
+          "average_precision_macro": 0.883774347431057,
+          "f1_macro": 0.7885950478829736,
+          "f1_micro": 0.7972093023255814,
+          "per_class": {
+            "NORMAL": {
+              "precision": 0.8258064516129032,
+              "recall": 0.6801275239107333,
+              "f1": 0.745920745920746,
+              "support": 941,
+              "confusion_matrix": [
+                [
+                  1074,
+                  135
+                ],
+                [
+                  301,
+                  640
+                ]
+              ],
+              "auroc": 0.8926744070551276,
+              "average_precision": 0.8462949370801846
+            },
+            "PATHOLOGICAL": {
+              "precision": 0.7810909090909091,
+              "recall": 0.8883374689826302,
+              "f1": 0.8312693498452013,
+              "support": 1209,
+              "confusion_matrix": [
+                [
+                  640,
+                  301
+                ],
+                [
+                  135,
+                  1074
+                ]
+              ],
+              "auroc": 0.8926893498899944,
+              "average_precision": 0.9212537577819294
+            }
+          }
+        },
+        {
+          "outer_fold": 4,
+          "inner_validation_fold": 5,
+          "n_train_ecg": 8562,
+          "n_inner_train_ecg": 6427,
+          "n_inner_validation_ecg": 2135,
+          "n_test_ecg": 2130,
+          "n_train_patients": 7405,
+          "n_inner_train_patients": 5540,
+          "n_inner_validation_patients": 1865,
+          "n_test_patients": 1858,
+          "best_epoch_from_inner_validation": 34,
+          "inner_early_stopping_auroc_pathological": 0.8991345281695348,
+          "threshold_from_inner_validation": 0.32,
+          "inner_training_duration_s": 19.9,
+          "accuracy": 0.8004694835680751,
+          "auroc_macro": 0.8978222494497765,
+          "average_precision_macro": 0.8882765251111471,
+          "f1_macro": 0.7853675306893015,
+          "f1_micro": 0.8004694835680751,
+          "per_class": {
+            "NORMAL": {
+              "precision": 0.8382352941176471,
+              "recall": 0.6440677966101694,
+              "f1": 0.7284345047923323,
+              "support": 885,
+              "confusion_matrix": [
+                [
+                  1135,
+                  110
+                ],
+                [
+                  315,
+                  570
+                ]
+              ],
+              "auroc": 0.8978222494497765,
+              "average_precision": 0.8438273448186602
+            },
+            "PATHOLOGICAL": {
+              "precision": 0.7827586206896552,
+              "recall": 0.9116465863453815,
+              "f1": 0.8423005565862709,
+              "support": 1245,
+              "confusion_matrix": [
+                [
+                  570,
+                  315
+                ],
+                [
+                  110,
+                  1135
+                ]
+              ],
+              "auroc": 0.8978222494497765,
+              "average_precision": 0.932725705403634
+            }
+          }
+        },
+        {
+          "outer_fold": 5,
+          "inner_validation_fold": 1,
+          "n_train_ecg": 8557,
+          "n_inner_train_ecg": 6418,
+          "n_inner_validation_ecg": 2139,
+          "n_test_ecg": 2135,
+          "n_train_patients": 7398,
+          "n_inner_train_patients": 5544,
+          "n_inner_validation_patients": 1854,
+          "n_test_patients": 1865,
+          "best_epoch_from_inner_validation": 26,
+          "inner_early_stopping_auroc_pathological": 0.890584143472198,
+          "threshold_from_inner_validation": 0.46,
+          "inner_training_duration_s": 14.6,
+          "accuracy": 0.8224824355971897,
+          "auroc_macro": 0.9001808663914902,
+          "average_precision_macro": 0.8864059261729265,
+          "f1_macro": 0.8173467588821012,
+          "f1_micro": 0.8224824355971897,
+          "per_class": {
+            "NORMAL": {
+              "precision": 0.7907239819004525,
+              "recall": 0.7827547592385219,
+              "f1": 0.7867191896454699,
+              "support": 893,
+              "confusion_matrix": [
+                [
+                  1057,
+                  185
+                ],
+                [
+                  194,
+                  699
+                ]
+              ],
+              "auroc": 0.9001808663914903,
+              "average_precision": 0.8404630094576772
+            },
+            "PATHOLOGICAL": {
+              "precision": 0.8449240607513989,
+              "recall": 0.8510466988727858,
+              "f1": 0.8479743281187324,
+              "support": 1242,
+              "confusion_matrix": [
+                [
+                  699,
+                  194
+                ],
+                [
+                  185,
+                  1057
+                ]
+              ],
+              "auroc": 0.9001808663914901,
+              "average_precision": 0.9323488428881757
+            }
+          }
+        }
+      ],
+      "summary": {
+        "auroc_macro": {
+          "mean": 0.897409179812675,
+          "std": 0.007008710537332647
+        },
+        "average_precision_macro": {
+          "mean": 0.8857332637353028,
+          "std": 0.011018565412515505
+        },
+        "accuracy": {
+          "mean": 0.8094012324556491,
+          "std": 0.011799190289947246
+        },
+        "f1_macro": {
+          "mean": 0.800324496896836,
+          "std": 0.01461712183744051
+        },
+        "PATHOLOGICAL": {
+          "precision": {
+            "mean": 0.8043315139262411,
+            "std": 0.025821843125706106
+          },
+          "recall": {
+            "mean": 0.8854294801633058,
+            "std": 0.02298902816854703
+          },
+          "f1": {
+            "mean": 0.8424143771765479,
+            "std": 0.007662542850580126
+          },
+          "auroc": {
+            "mean": 0.897413442129037,
+            "std": 0.007009846276579772
+          },
+          "average_precision": {
+            "mean": 0.9272880031277821,
+            "std": 0.0054705544218472645
+          }
+        }
+      }
+    }
+  }
+}

@@ -1,0 +1,20 @@
+{
+  "preprocessing": "P1",
+  "hidden_sizes": [
+    128,
+    64
+  ],
+  "dropout": 0.3,
+  "loss": "CrossEntropyLoss",
+  "optimizer": "AdamW",
+  "learning_rate": 0.001,
+  "weight_decay": 0.0001,
+  "batch_size": 128,
+  "max_epochs": 200,
+  "early_stopping_metric": "val_auroc_pathological",
+  "patience": 20,
+  "num_threads": 4,
+  "name": "mlp-binary-pathological",
+  "seed": 3,
+  "run_id": "mlp-binary-pathological_seed3"
+}

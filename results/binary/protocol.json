@@ -1,0 +1,291 @@
+{
+  "status": "trained_validation_tuned",
+  "task": "binary",
+  "classes": [
+    "NORMAL",
+    "PATHOLOGICAL"
+  ],
+  "source_classes": [
+    "NORM",
+    "MI",
+    "STTC",
+    "CD",
+    "HYP"
+  ],
+  "label_rule": "PATHOLOGICAL si MI, STTC, CD ou HYP est présent; sinon NORMAL si NORM est présent.",
+  "architecture": {
+    "hidden_sizes": [
+      128,
+      64
+    ],
+    "dropout": 0.3,
+    "n_outputs": 2,
+    "output": "softmax"
+  },
+  "preprocessing": "P1",
+  "training": {
+    "preprocessing": "P1",
+    "hidden_sizes": [
+      128,
+      64
+    ],
+    "dropout": 0.3,
+    "loss": "CrossEntropyLoss",
+    "optimizer": "AdamW",
+    "learning_rate": 0.001,
+    "weight_decay": 0.0001,
+    "batch_size": 128,
+    "max_epochs": 200,
+    "early_stopping_metric": "val_auroc_pathological",
+    "patience": 20,
+    "num_threads": 4
+  },
+  "seeds": [
+    0,
+    1,
+    2,
+    3,
+    4
+  ],
+  "run_ids": [
+    "mlp-binary-pathological_seed0",
+    "mlp-binary-pathological_seed1",
+    "mlp-binary-pathological_seed2",
+    "mlp-binary-pathological_seed3",
+    "mlp-binary-pathological_seed4"
+  ],
+  "thresholds": {
+    "mlp-binary-pathological_seed0": 0.33,
+    "mlp-binary-pathological_seed1": 0.42,
+    "mlp-binary-pathological_seed2": 0.42,
+    "mlp-binary-pathological_seed3": 0.37,
+    "mlp-binary-pathological_seed4": 0.47
+  },
+  "validation": {
+    "mlp-binary-pathological_seed0": {
+      "accuracy": 0.7896200185356812,
+      "auroc_macro": 0.87667861718904,
+      "average_precision_macro": 0.8677620234814962,
+      "f1_macro": 0.7801447850888413,
+      "f1_micro": 0.7896200185356812,
+      "per_class": {
+        "NORMAL": {
+          "precision": 0.7869674185463659,
+          "recall": 0.6885964912280702,
+          "f1": 0.7345029239766082,
+          "support": 912,
+          "confusion_matrix": [
+            [
+              1076,
+              170
+            ],
+            [
+              284,
+              628
+            ]
+          ],
+          "auroc": 0.8766781771845344,
+          "average_precision": 0.8255945520510969
+        },
+        "PATHOLOGICAL": {
+          "precision": 0.7911764705882353,
+          "recall": 0.8635634028892456,
+          "f1": 0.8257866462010744,
+          "support": 1246,
+          "confusion_matrix": [
+            [
+              628,
+              284
+            ],
+            [
+              170,
+              1076
+            ]
+          ],
+          "auroc": 0.8766790571935457,
+          "average_precision": 0.9099294949118957
+        }
+      }
+    },
+    "mlp-binary-pathological_seed1": {
+      "accuracy": 0.8002780352177943,
+      "auroc_macro": 0.8793536245811158,
+      "average_precision_macro": 0.8697363976206582,
+      "f1_macro": 0.7934989208680213,
+      "f1_micro": 0.8002780352177943,
+      "per_class": {
+        "NORMAL": {
+          "precision": 0.7812865497076024,
+          "recall": 0.7324561403508771,
+          "f1": 0.7560837577815507,
+          "support": 912,
+          "confusion_matrix": [
+            [
+              1059,
+              187
+            ],
+            [
+              244,
+              668
+            ]
+          ],
+          "auroc": 0.8793525245698516,
+          "average_precision": 0.8278705792379528
+        },
+        "PATHOLOGICAL": {
+          "precision": 0.8127398311588642,
+          "recall": 0.8499197431781701,
+          "f1": 0.830914083954492,
+          "support": 1246,
+          "confusion_matrix": [
+            [
+              668,
+              244
+            ],
+            [
+              187,
+              1059
+            ]
+          ],
+          "auroc": 0.8793547245923798,
+          "average_precision": 0.9116022160033637
+        }
+      }
+    },
+    "mlp-binary-pathological_seed2": {
+      "accuracy": 0.8058387395736794,
+      "auroc_macro": 0.879994931148095,
+      "average_precision_macro": 0.8719520462924825,
+      "f1_macro": 0.8005006227446879,
+      "f1_micro": 0.8058387395736794,
+      "per_class": {
+        "NORMAL": {
+          "precision": 0.7760358342665173,
+          "recall": 0.7598684210526315,
+          "f1": 0.7678670360110803,
+          "support": 912,
+          "confusion_matrix": [
+            [
+              1046,
+              200
+            ],
+            [
+              219,
+              693
+            ]
+          ],
+          "auroc": 0.8799940511390837,
+          "average_precision": 0.8313726086597856
+        },
+        "PATHOLOGICAL": {
+          "precision": 0.8268774703557312,
+          "recall": 0.8394863563402889,
+          "f1": 0.8331342094782955,
+          "support": 1246,
+          "confusion_matrix": [
+            [
+              693,
+              219
+            ],
+            [
+              200,
+              1046
+            ]
+          ],
+          "auroc": 0.8799958111571062,
+          "average_precision": 0.9125314839251794
+        }
+      }
+    },
+    "mlp-binary-pathological_seed3": {
+      "accuracy": 0.7951807228915663,
+      "auroc_macro": 0.8809539209681507,
+      "average_precision_macro": 0.8741379679789825,
+      "f1_macro": 0.785782880345681,
+      "f1_micro": 0.7951807228915663,
+      "per_class": {
+        "NORMAL": {
+          "precision": 0.7959697732997482,
+          "recall": 0.6929824561403509,
+          "f1": 0.7409144196951934,
+          "support": 912,
+          "confusion_matrix": [
+            [
+              1084,
+              162
+            ],
+            [
+              280,
+              632
+            ]
+          ],
+          "auroc": 0.880955900988426,
+          "average_precision": 0.8361288839589052
+        },
+        "PATHOLOGICAL": {
+          "precision": 0.7947214076246334,
+          "recall": 0.869983948635634,
+          "f1": 0.8306513409961686,
+          "support": 1246,
+          "confusion_matrix": [
+            [
+              632,
+              280
+            ],
+            [
+              162,
+              1084
+            ]
+          ],
+          "auroc": 0.8809519409478753,
+          "average_precision": 0.9121470519990599
+        }
+      }
+    },
+    "mlp-binary-pathological_seed4": {
+      "accuracy": 0.8035217794253939,
+      "auroc_macro": 0.8794821058967645,
+      "average_precision_macro": 0.8707764740810717,
+      "f1_macro": 0.798875451160378,
+      "f1_micro": 0.8035217794253939,
+      "per_class": {
+        "NORMAL": {
+          "precision": 0.7657952069716776,
+          "recall": 0.7708333333333334,
+          "f1": 0.7683060109289618,
+          "support": 912,
+          "confusion_matrix": [
+            [
+              1031,
+              215
+            ],
+            [
+              209,
+              703
+            ]
+          ],
+          "auroc": 0.8794827659035229,
+          "average_precision": 0.8301721881958893
+        },
+        "PATHOLOGICAL": {
+          "precision": 0.8314516129032258,
+          "recall": 0.8274478330658106,
+          "f1": 0.829444891391794,
+          "support": 1246,
+          "confusion_matrix": [
+            [
+              703,
+              209
+            ],
+            [
+              215,
+              1031
+            ]
+          ],
+          "auroc": 0.879481445890006,
+          "average_precision": 0.9113807599662542
+        }
+      }
+    }
+  }
+}

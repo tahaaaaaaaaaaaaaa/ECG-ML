@@ -1,0 +1,402 @@
+<!doctype html>
+<html lang="fr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Fonctionnement du réseau</title>
+<meta name="description" content="Explication animée du perceptron multicouche : couche d'entrée, couches cachées, couche de sortie et apprentissage, avec les vrais poids du modèle.">
+<link rel="stylesheet" href="/static/commun.css">
+<link rel="stylesheet" href="/static/fonctionnement.css">
+</head>
+<body>
+
+<header class="barre">
+  <div class="marque">
+    <svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M2 12h4l2-5 4 11 3-8 2 2h5"/></svg>
+    ECG · MLP <small>PTB-XL · normal / pathologique</small>
+  </div>
+  <nav class="fenetres" aria-label="Fenêtres de l'interface">
+    <a href="/utilisation" id="lien-utilisation"><span class="num">1</span> Utilisation du modèle</a>
+    <a href="/fonctionnement" aria-current="page"><span class="num">2</span> Fonctionnement du réseau</a>
+  </nav>
+</header>
+
+<div class="avertissement" role="note">
+  <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" aria-hidden="true"><circle cx="12" cy="12" r="10"/><path d="M12 7v6M12 17h.01"/></svg>
+  <span><b>Outil pédagogique.</b> Issu d'un projet académique sur une base publique : ce n'est pas un dispositif médical et ses sorties n'ont aucune valeur diagnostique.</span>
+</div>
+
+<div class="page grille-fonctionnement">
+
+  <nav class="sommaire" aria-label="Sommaire">
+    <p class="sommaire-titre">Sommaire</p>
+    <a href="#vue"><span>1</span>Vue d'ensemble</a>
+    <a href="#neurone"><span>2</span>Le neurone artificiel</a>
+    <a href="#entree"><span>3</span>La couche d'entrée</a>
+    <a href="#cachees"><span>4</span>Les couches cachées</a>
+    <a href="#sortie"><span>5</span>La couche de sortie</a>
+    <a href="#apprentissage"><span>6</span>L'apprentissage</a>
+    <a href="#retenir"><span>7</span>À retenir</a>
+  </nav>
+
+  <main class="contenu-fonctionnement">
+
+    <section class="carte fil" id="fil">
+      <div class="fil-texte">
+        <h1>Comment le réseau lit un ECG</h1>
+        <p class="aide">Toute la page suit un même ECG, de son signal brut jusqu'aux décisions, avec les vrais poids du modèle choisi. Les animations démarrent quand elles apparaissent à l'écran.</p>
+      </div>
+      <div class="fil-controles">
+        <div class="fil-ecg"><span class="discret">ECG suivi</span> <b id="fil-ecg">Chargement…</b> <span id="fil-badges"></span></div>
+        <div class="fil-boutons">
+          <span class="discret">Graine</span>
+          <div class="segments" id="fil-graine" role="group" aria-label="Graine du modèle"></div>
+          <button class="bouton petit" type="button" id="fil-hasard">Autre ECG au hasard</button>
+        </div>
+      </div>
+    </section>
+
+    <!-- ======================================================= 1 -->
+    <section class="chapitre" id="vue">
+      <header class="chapitre-tete">
+        <span class="chapitre-num">1</span>
+        <div>
+          <h2>Vue d'ensemble</h2>
+          <p class="chapeau">Le modèle est un perceptron multicouche (MLP). Ses neurones sont rangés en couches, et chaque neurone d'une couche est relié à tous ceux de la couche suivante. L'information circule dans un seul sens, de l'ECG vers les décisions.</p>
+        </div>
+      </header>
+      <div class="carte">
+        <div class="pipeline" id="pipeline">
+          <div class="etape-p"><b>ECG</b><span>12 dérivations, 10 s, 500 Hz</span><em>60 000 valeurs</em><i id="pv-ecg"></i></div>
+          <div class="fleche-p" aria-hidden="true"></div>
+          <div class="etape-p"><b>Statistiques</b><span>10 par dérivation</span><em>120 valeurs</em><i id="pv-stat"></i></div>
+          <div class="fleche-p" aria-hidden="true"></div>
+          <div class="etape-p accent"><b>Couche d'entrée</b><span>normalisée avec le train</span><em>120 neurones</em><i id="pv-entree"></i></div>
+          <div class="fleche-p" aria-hidden="true"></div>
+          <div class="etape-p"><b>Couche cachée 1</b><span>ReLU</span><em>128 neurones</em><i id="pv-c1"></i></div>
+          <div class="fleche-p" aria-hidden="true"></div>
+          <div class="etape-p"><b>Couche cachée 2</b><span>ReLU</span><em>64 neurones</em><i id="pv-c2"></i></div>
+          <div class="fleche-p" aria-hidden="true"></div>
+          <div class="etape-p accent"><b>Couche de sortie</b><span>softmax</span><em>2 probabilités</em><i id="pv-sortie"></i></div>
+          <div class="fleche-p" aria-hidden="true"></div>
+          <div class="etape-p"><b>Décision</b><span>seuil pathologique</span><em>une classe exclusive</em><i id="pv-decision"></i></div>
+        </div>
+        <div class="trois-faits">
+          <div><b>Pas de détection d'onde</b><span>Le réseau ne voit pas les battements un par un : seulement des statistiques calculées sur les 10 s de chaque dérivation.</span></div>
+          <div><b>23 874 paramètres</b><span>Poids et biais appris sur les 10 692 ECG du train, puis gelés.</span></div>
+          <div><b>2 classes exclusives</b><span>Chaque ECG est classé normal ou pathologique ; toute pathologie l'emporte sur NORM.</span></div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ======================================================= 2 -->
+    <section class="chapitre" id="neurone">
+      <header class="chapitre-tete">
+        <span class="chapitre-num">2</span>
+        <div>
+          <h2>Le neurone artificiel</h2>
+          <p class="chapeau">C'est la brique de base du réseau : une petite fonction qui combine ses entrées et décide de ce qu'elle transmet.</p>
+        </div>
+      </header>
+      <div class="carte bloc">
+        <div class="bloc-texte">
+          <p>Un neurone fait trois opérations :</p>
+          <ol class="etapes-liste">
+            <li>il multiplie chaque entrée <i>x</i><sub>i</sub> par un <b>poids</b> <i>w</i><sub>i</sub> ;</li>
+            <li>il additionne ces produits et ajoute un <b>biais</b> <i>b</i> : c'est la <b>somme pondérée</b> <i>z</i> ;</li>
+            <li>il applique une <b>fonction d'activation</b> <i>f</i> et transmet <i>a</i> = <i>f</i>(<i>z</i>).</li>
+          </ol>
+          <p>Poids et biais sont les <b>paramètres</b> que l'apprentissage ajuste. Un poids positif fait monter <i>z</i> quand l'entrée augmente, un poids négatif le fait baisser, un poids proche de 0 rend l'entrée presque sans effet.</p>
+          <p>Dans les couches cachées, <i>f</i> est la <b>ReLU</b> : <i>f</i>(<i>z</i>) = max(0, <i>z</i>). Une somme négative donne 0 : le neurone est <b>inactif</b> et ne transmet rien. Sans cette non-linéarité, empiler des couches reviendrait à une seule transformation linéaire.</p>
+          <p>La couche de sortie applique une <b>softmax</b> aux deux logits pour obtenir les probabilités normal et pathologique (chapitre 5).</p>
+          <p class="aide">Faites varier les entrées, les poids et le biais.</p>
+        </div>
+        <div class="bloc-scene">
+          <canvas id="neurone-canvas" aria-label="Schéma animé d'un neurone à trois entrées"></canvas>
+          <div class="formule" id="neurone-formule"></div>
+          <div class="neurone-controles" id="neurone-controles"></div>
+          <div class="segments" id="neurone-activation" role="group" aria-label="Fonction d'activation">
+            <button type="button" aria-pressed="true" data-act="relu">ReLU (couches cachées)</button>
+            <button type="button" aria-pressed="false" data-act="sigmoide">Sigmoïde (fonction illustrative)</button>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ======================================================= 3 -->
+    <section class="chapitre" id="entree">
+      <header class="chapitre-tete">
+        <span class="chapitre-num">3</span>
+        <div>
+          <h2>La couche d'entrée</h2>
+          <p class="chapeau">Le réseau ne reçoit pas le signal lui-même (60 000 valeurs) mais 120 nombres qui le résument. La couche d'entrée ne calcule rien : elle transmet ces 120 valeurs, une fois normalisées, à chacun des 128 neurones de la couche suivante.</p>
+        </div>
+      </header>
+
+      <div class="carte bloc">
+        <div class="bloc-texte">
+          <h3><span class="sous-num">3.1</span> Du signal aux statistiques</h3>
+          <p>Pour chacune des 12 dérivations, 10 statistiques sont calculées sur les 5 000 échantillons (10 s à 500 Hz). Elles décrivent le niveau du signal, sa dispersion, ses extrêmes, la forme de la distribution de ses amplitudes et la longueur du tracé.</p>
+          <p>Aucune onde n'est détectée : ni P, ni QRS, ni T. C'est ce qui rend l'extraction simple et robuste, mais c'est aussi la principale limite du modèle.</p>
+          <div class="legende-stat" id="stats-legende" aria-live="polite"></div>
+        </div>
+        <div class="bloc-scene">
+          <div class="scene-outils">
+            <label class="champ champ-ligne">Dérivation <select id="stats-derivation"></select></label>
+            <button class="bouton petit" type="button" id="stats-lecture">Pause</button>
+          </div>
+          <div class="puces-stats" id="stats-puces" role="group" aria-label="Statistique affichée"></div>
+          <canvas id="stats-canvas" aria-label="Dérivation choisie et statistique illustrée"></canvas>
+        </div>
+      </div>
+
+      <div class="carte bloc">
+        <div class="bloc-texte">
+          <h3><span class="sous-num">3.2</span> La normalisation</h3>
+          <p>Les statistiques n'ont ni les mêmes unités ni les mêmes ordres de grandeur : une longueur de ligne vaut plusieurs dizaines de mV, une asymétrie n'a pas d'unité. Avant d'entrer dans le réseau, chacune est <b>centrée et réduite</b> :</p>
+          <p class="formule-texte"><i>z</i> = (<i>x</i> − <i>μ</i>) / <i>σ</i></p>
+          <p><i>μ</i> et <i>σ</i> sont la moyenne et l'écart-type de cette statistique sur les <b>10 692 ECG du train</b>. Ces paramètres, ajustés uniquement sur le train (prétraitement P1), sont réutilisés pour la validation et les nouveaux ECG. <i>z</i> = 0 signifie « comme la moyenne du train », <i>z</i> = 2 « deux écarts-types au-dessus ».</p>
+        </div>
+        <div class="bloc-scene">
+          <div class="scene-outils">
+            <label class="champ champ-ligne">Entrée <select id="norm-entree"></select></label>
+            <button class="bouton petit principal" type="button" id="norm-bouton">Normaliser</button>
+          </div>
+          <canvas id="norm-canvas" aria-label="Distribution de l'entrée sur le train et position de cet ECG"></canvas>
+          <div class="formule" id="norm-formule"></div>
+          <p class="discret" id="norm-note"></p>
+        </div>
+      </div>
+
+      <div class="carte bloc">
+        <div class="bloc-texte">
+          <h3><span class="sous-num">3.3</span> Les 120 entrées du réseau</h3>
+          <p>Une fois normalisées, les 10 statistiques de chacune des 12 dérivations forment les 120 valeurs transmises au réseau.</p>
+          <p>Les 120 valeurs sont mises bout à bout, dérivation par dérivation (I, puis II, … puis V6, 10 valeurs chacune) : ce sont les <b>120 neurones d'entrée</b>. Leur couleur indique la valeur normalisée <i>z</i> de cet ECG (section 3.2).</p>
+          <div class="legende-z"><span>−3</span><span class="rampe"></span><span>+3</span></div>
+          <button class="bouton petit" type="button" id="grille-rejouer" style="margin-top:14px">Rejouer l'animation</button>
+        </div>
+        <div class="bloc-scene">
+          <canvas id="grille-canvas" aria-label="Animation : du tableau 12 × 10 à la colonne des 120 entrées"></canvas>
+        </div>
+      </div>
+    </section>
+
+    <!-- ======================================================= 4 -->
+    <section class="chapitre" id="cachees">
+      <header class="chapitre-tete">
+        <span class="chapitre-num">4</span>
+        <div>
+          <h2>Les couches cachées</h2>
+          <p class="chapeau">Les deux couches cachées transforment les 120 entrées en représentations intermédiaires. Personne ne leur a dit quoi calculer : leurs poids viennent uniquement de l'apprentissage.</p>
+        </div>
+      </header>
+      <div class="carte bloc bloc-large">
+        <div class="bloc-texte">
+          <table class="tableau-params">
+            <thead><tr><th>Couche</th><th>Calcul</th><th>Paramètres</th></tr></thead>
+            <tbody>
+              <tr><td>Cachée 1 (128)</td><td>120 × 128 poids + 128 biais</td><td class="nombre">15 488</td></tr>
+              <tr><td>Cachée 2 (64)</td><td>128 × 64 poids + 64 biais</td><td class="nombre">8 256</td></tr>
+              <tr><td>Sortie (2)</td><td>64 × 2 poids + 2 biais</td><td class="nombre">130</td></tr>
+              <tr class="total"><td>Total</td><td></td><td class="nombre">23 874</td></tr>
+            </tbody>
+          </table>
+          <p>Chaque neurone de la couche 1 calcule sa propre somme pondérée des 120 entrées, puis applique la ReLU. La couche 2 fait de même avec les 128 sorties de la couche 1.</p>
+          <p id="reseau-actifs" class="encadre"></p>
+          <p>Couleur des liens : <span class="puce-couleur orange"></span> contribution positive, <span class="puce-couleur bleu"></span> contribution négative. Pendant la propagation, seuls les liens qui pèsent le plus (|poids × valeur transmise|) s'allument. Survolez un neurone pour voir son calcul.</p>
+          <p><b>Le dropout</b> ne sert que pendant l'apprentissage : à chaque mini-lot, 30 % des neurones cachés sont éteints au hasard, ce qui empêche le réseau de dépendre de quelques neurones. Lors du réglage, c'est la régularisation qui a le plus compté. À l'utilisation, tous les neurones sont actifs.</p>
+        </div>
+        <div class="bloc-scene">
+          <div class="scene-outils">
+            <button class="bouton petit principal" type="button" id="reseau-propager">Propager cet ECG</button>
+            <button class="bouton petit" type="button" id="reseau-dropout" aria-pressed="false">Voir le dropout (apprentissage)</button>
+          </div>
+          <canvas id="reseau-canvas" aria-label="Réseau 120, 128, 64, 2 et propagation de l'ECG"></canvas>
+          <p class="discret" id="reseau-note"></p>
+        </div>
+      </div>
+    </section>
+
+    <!-- ======================================================= 5 -->
+    <section class="chapitre" id="sortie">
+      <header class="chapitre-tete">
+        <span class="chapitre-num">5</span>
+        <div>
+          <h2>La couche de sortie</h2>
+          <p class="chapeau">Deux neurones produisent des scores concurrents : « cet ECG est-il normal ou pathologique ? » La softmax transforme ces scores en probabilités dont la somme vaut 1.</p>
+        </div>
+      </header>
+
+      <div class="carte bloc">
+        <div class="bloc-texte">
+          <h3><span class="sous-num">5.1</span> Des logits aux probabilités : la softmax</h3>
+          <p>Chaque neurone de sortie calcule une somme pondérée des 64 valeurs de la couche 2 (64 poids et un biais). Ce nombre, le <b>logit</b>, peut prendre n'importe quelle valeur réelle.</p>
+          <p>La <b>softmax</b> transforme les deux logits en probabilités entre 0 et 1, dont la somme vaut 1. Un logit plus élevé donne la probabilité la plus élevée.</p>
+          <table class="tableau-sortie" id="sigmoide-table"></table>
+        </div>
+        <div class="bloc-scene">
+          <canvas id="sigmoide-canvas" aria-label="Probabilités normal et pathologique de cet ECG"></canvas>
+          <button class="bouton petit" type="button" id="sigmoide-rejouer">Rejouer</button>
+        </div>
+      </div>
+
+      <div class="carte bloc">
+        <div class="bloc-texte">
+          <h3><span class="sous-num">5.2</span> Une classe exclusive par ECG</h3>
+          <p>La cible binaire regroupe les superclasses : un ECG est <b>PATHOLOGICAL</b> si MI, STTC, CD ou HYP est présent ; sinon il est <b>NORMAL</b> si NORM est présent.</p>
+          <p>Les ECG co-étiquetés NORM et une pathologie sont classés pathologiques. Cette règle donne priorité aux diagnostics pathologiques et produit une cible unique pour chaque ECG.</p>
+          <p class="discret">La softmax est la sortie réellement utilisée par le modèle ; les deux probabilités totalisent 1.</p>
+        </div>
+        <div class="bloc-scene">
+          <div class="comparaison" id="comparaison"></div>
+        </div>
+      </div>
+
+      <div class="carte bloc">
+        <div class="bloc-texte">
+          <h3><span class="sous-num">5.3</span> Du score à la décision binaire</h3>
+          <p>La classe pathologique est prédite si sa probabilité atteint le seuil choisi sur la validation pour maximiser son F1. Sinon, le modèle prédit NORMAL. Il n'y a donc jamais de décision vide ou de multi-étiquetage.</p>
+          <p>Les seuils par graine, choisis sur une grille de 0,01 à 0,99, matérialisent le compromis entre précision et rappel de la classe pathologique.</p>
+          <p id="seuils-regle" class="encadre"></p>
+        </div>
+        <div class="bloc-scene">
+          <div class="seuils" id="seuils"></div>
+        </div>
+      </div>
+
+      <div class="carte bloc">
+        <div class="bloc-texte">
+          <h3><span class="sous-num">5.4</span> Mesurer les décisions : précision, rappel et F1</h3>
+          <p>Sur des ECG annotés, une prédiction tombe dans l'une de quatre cases : <b>vrai positif</b> (VP : pathologique et prédit pathologique), <b>faux positif</b> (FP : normal mais prédit pathologique), <b>faux négatif</b> (FN : pathologique prédit normal) ou <b>vrai négatif</b> (VN).</p>
+          <ul class="liste-mesures">
+            <li><b>Précision</b> = VP / (VP + FP) : parmi les ECG prédits pathologiques, la part réellement pathologique.</li>
+            <li><b>Rappel</b> (sensibilité) = VP / (VP + FN) : parmi les ECG pathologiques, la part détectée.</li>
+            <li><b>F1</b> = 2 × précision × rappel / (précision + rappel) : leur moyenne harmonique, élevée seulement si les deux le sont.</li>
+          </ul>
+          <p>Le seuil règle le compromis : l'abaisser fait prédire pathologique plus souvent, ce qui augmente le rappel et diminue en général la précision. Le seuil est choisi pour maximiser le F1 pathologique sur la validation.</p>
+          <p>Le <b>F1 macro</b> est la moyenne du F1 de la classe normale et de la classe pathologique.</p>
+          <p class="discret">Les nombres affichés viennent de l'évaluation unique sur les 2 129 ECG du test (phase 6), pour le modèle choisi. L'interface relit ces résultats enregistrés ; elle ne recalcule rien sur le test.</p>
+        </div>
+        <div class="bloc-scene">
+          <div class="segments" id="mesures-classe" role="group" aria-label="Superclasse"></div>
+          <div class="mesures" id="mesures">
+            <div class="matrice" id="mesures-matrice" aria-label="Matrice de confusion sur le test"></div>
+            <div class="formules-mesures" id="mesures-formules"></div>
+          </div>
+          <table class="tableau-sortie tableau-mesures" id="mesures-table"></table>
+        </div>
+      </div>
+
+    </section>
+
+    <!-- ======================================================= 6 -->
+    <section class="chapitre" id="apprentissage">
+      <header class="chapitre-tete">
+        <span class="chapitre-num">6</span>
+        <div>
+          <h2>L'apprentissage</h2>
+          <p class="chapeau">Au départ, les 23 874 paramètres sont tirés au hasard. L'apprentissage les ajuste pas à pas pour que les sorties se rapprochent des annotations des ECG du train.</p>
+        </div>
+      </header>
+
+      <div class="carte bloc">
+        <div class="bloc-texte">
+          <h3><span class="sous-num">6.1</span> Mesurer l'erreur : l'entropie croisée</h3>
+          <p>L'entropie croisée pénalise la probabilité attribuée à la mauvaise classe :</p>
+          <p class="formule-texte">perte = −ln( <i>p</i><sub>classe réelle</sub> )</p>
+          <p>Une prédiction juste et confiante coûte presque 0 ; une prédiction <b>fausse et confiante</b> coûte très cher. La perte est moyennée sur les 128 ECG d'un mini-lot.</p>
+          <p id="perte-ecg" class="encadre"></p>
+        </div>
+        <div class="bloc-scene">
+          <canvas id="perte-canvas" aria-label="Courbes de la perte selon la probabilité"></canvas>
+          <div class="scene-outils">
+            <div class="segments" id="perte-y" role="group" aria-label="Classe réelle">
+              <button type="button" aria-pressed="true" data-y="1">Pathologique</button>
+              <button type="button" aria-pressed="false" data-y="0">Normale</button>
+            </div>
+            <label class="champ champ-ligne champ-curseur">p <input type="range" id="perte-p" min="0.01" max="0.99" step="0.01" value="0.8"></label>
+          </div>
+        </div>
+      </div>
+
+      <div class="carte bloc">
+        <div class="bloc-texte">
+          <h3><span class="sous-num">6.2</span> Corriger les poids : la descente de gradient</h3>
+          <p>Pour diminuer la perte, chaque paramètre est déplacé dans le sens opposé à sa pente : <i>w</i> ← <i>w</i> − η × pente. La <b>rétropropagation</b> calcule ces pentes pour les 23 874 paramètres en remontant le réseau de la sortie vers l'entrée.</p>
+          <p>L'animation montre un seul poids. Le <b>taux d'apprentissage</b> η règle la taille du pas : trop petit, l'apprentissage est lent ; trop grand, il oscille ou diverge.</p>
+          <p>Le modèle utilise l'optimiseur <b>AdamW</b>, qui adapte le pas de chaque paramètre (taux de base 0,001) et ramène doucement les poids vers 0 (décroissance des poids 0,0001). Une <b>époque</b> est un passage complet sur les 10 692 ECG du train, soit 84 mini-lots de 128 ECG au plus.</p>
+        </div>
+        <div class="bloc-scene">
+          <canvas id="gradient-canvas" aria-label="Descente de gradient sur une courbe de perte à un poids"></canvas>
+          <div class="scene-outils">
+            <div class="segments" id="gradient-eta" role="group" aria-label="Taux d'apprentissage">
+              <button type="button" aria-pressed="false" data-eta="0.12">η petit</button>
+              <button type="button" aria-pressed="true" data-eta="0.6">η adapté</button>
+              <button type="button" aria-pressed="false" data-eta="2.08">η trop grand</button>
+            </div>
+            <button class="bouton petit" type="button" id="gradient-pas">Un pas</button>
+            <button class="bouton petit" type="button" id="gradient-lecture">Lecture</button>
+            <button class="bouton petit" type="button" id="gradient-zero">Recommencer</button>
+          </div>
+          <div class="formule" id="gradient-formule"></div>
+        </div>
+      </div>
+
+      <div class="carte bloc">
+        <div class="bloc-texte">
+          <h3><span class="sous-num">6.3</span> Les époques et l'arrêt précoce</h3>
+          <p>Les courbes montrent, époque par époque, la perte (entropie croisée) et l'exactitude sur le train et la validation interne. Elles sont moyennées sur les cinq plis de validation croisée de la graine sélectionnée. Un écart croissant entre train et validation peut signaler du <b>surapprentissage</b>. Les axes sont fixes (perte de 0 à 0,8, exactitude de 50 à 100 %, le niveau du hasard) pour comparer les graines à la même échelle.</p>
+          <p>L'entraînement s'arrête quand l'AUROC pathologique de validation ne s'est pas améliorée pendant <b>20 époques</b> (patience). Les poids conservés sont ceux de la meilleure époque.</p>
+          <p id="courbes-texte" class="encadre"></p>
+        </div>
+        <div class="bloc-scene">
+          <canvas id="courbes-canvas" aria-label="Courbes moyennes de perte et d'exactitude en entraînement et validation"></canvas>
+          <button class="bouton petit" type="button" id="courbes-rejouer">Rejouer</button>
+        </div>
+      </div>
+
+      <div class="carte bloc">
+        <div class="bloc-texte">
+          <h3><span class="sous-num">6.4</span> Juger le classement : la courbe ROC et l'AUROC</h3>
+          <p>Le réseau produit une probabilité ; le seuil la transforme en décision. La <b>courbe ROC</b> montre ce que donnerait <b>chaque seuil possible</b> sur les ECG du test : un seuil de 1 déclare tout normal (en bas à gauche), un seuil de 0 déclare tout pathologique (en haut à droite).</p>
+          <ul class="liste-mesures">
+            <li><b>Axe horizontal</b> : taux de faux positifs = FP / (FP + VN), la part des ECG normaux signalés à tort comme pathologiques (1 − spécificité).</li>
+            <li><b>Axe vertical</b> : taux de vrais positifs = VP / (VP + FN), la part des ECG pathologiques détectés (sensibilité, ou rappel).</li>
+          </ul>
+          <p>L'<b>AUROC</b> est l'aire sous cette courbe. Elle se lit comme une probabilité : celle qu'un ECG pathologique tiré au hasard reçoive un score plus élevé qu'un ECG normal tiré au hasard. Elle vaut 0,5 pour un modèle qui répond au hasard (la diagonale) et 1 pour une séparation parfaite. Elle juge le classement des ECG, indépendamment du seuil retenu.</p>
+          <p id="roc-texte" class="encadre"></p>
+          <p class="discret">Courbes calculées une seule fois sur les ECG du test à partir des modèles enregistrés (<code>results/binary/test_roc.json</code>) ; l'interface relit ces résultats, elle ne lit pas le test.</p>
+        </div>
+        <div class="bloc-scene">
+          <canvas id="roc-canvas" aria-label="Courbe ROC du modèle sur le test, avec l'aire sous la courbe et le point de fonctionnement au seuil choisi"></canvas>
+          <button class="bouton petit" type="button" id="roc-rejouer">Rejouer</button>
+        </div>
+      </div>
+    </section>
+
+    <!-- ======================================================= 7 -->
+    <section class="chapitre" id="retenir">
+      <header class="chapitre-tete">
+        <span class="chapitre-num">7</span>
+        <div>
+          <h2>À retenir</h2>
+        </div>
+      </header>
+      <div class="retenir">
+        <div class="carte"><h3>Couche d'entrée</h3><p>120 statistiques globales (12 dérivations × 10), centrées et réduites avec la moyenne et l'écart-type du train. Elle transmet, elle ne calcule pas.</p></div>
+        <div class="carte"><h3>Couches cachées</h3><p>128 puis 64 neurones ReLU, qui combinent les entrées selon des poids appris. Dropout de 0,3 pendant l'apprentissage seulement.</p></div>
+        <div class="carte"><h3>Couche de sortie</h3><p>2 logits transformés par softmax, puis un seuil pathologique : chaque ECG est normal ou pathologique.</p></div>
+      </div>
+    </section>
+  </main>
+</div>
+
+<footer class="pied">
+  Projet académique : classification binaire d'ECG (PTB-XL v1.0.3) par perceptron multicouche. Les résultats affichés proviennent des modèles binaires et artefacts enregistrés.
+</footer>
+
+<script src="/static/commun.js"></script>
+<script src="/static/fonctionnement.js"></script>
+</body>
+</html>

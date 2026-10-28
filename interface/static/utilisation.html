@@ -1,0 +1,126 @@
+<!doctype html>
+<html lang="fr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Utilisation du modèle</title>
+<meta name="description" content="Classer un ECG 12 dérivations comme normal ou pathologique avec un perceptron multicouche.">
+<link rel="stylesheet" href="/static/commun.css">
+<link rel="stylesheet" href="/static/utilisation.css">
+</head>
+<body>
+
+<header class="barre">
+  <div class="marque">
+    <svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M2 12h4l2-5 4 11 3-8 2 2h5"/></svg>
+    ECG · MLP <small>PTB-XL · normal / pathologique</small>
+  </div>
+  <nav class="fenetres" aria-label="Fenêtres de l'interface">
+    <a href="/utilisation" aria-current="page"><span class="num">1</span> Utilisation du modèle</a>
+    <a href="/fonctionnement" id="lien-fonctionnement"><span class="num">2</span> Fonctionnement du réseau</a>
+  </nav>
+</header>
+
+<div class="avertissement" role="note">
+  <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" aria-hidden="true"><circle cx="12" cy="12" r="10"/><path d="M12 7v6M12 17h.01"/></svg>
+  <span><b>Outil pédagogique.</b> Issu d'un projet académique sur une base publique : ce n'est pas un dispositif médical et ses sorties n'ont aucune valeur diagnostique.</span>
+</div>
+
+<section class="intro-projet" aria-label="Présentation de la démonstration">
+  <div>
+    <p class="surtitre">Classification binaire · PTB-XL</p>
+    <h1>Explorer un signal ECG</h1>
+    <p>Suivez le parcours d'un ECG à travers le modèle et observez comment 120 statistiques conduisent à une prédiction NORMAL ou PATHOLOGICAL.</p>
+  </div>
+  <div class="intro-resume" aria-label="Résumé du modèle">
+    <div><b>12</b><span>dérivations ECG</span></div>
+    <div><b>120</b><span>caractéristiques</span></div>
+    <div><b>2</b><span>classes exclusives</span></div>
+  </div>
+</section>
+
+<main class="page grille-utilisation">
+
+  <aside class="colonne-gauche">
+    <section class="carte">
+      <h2><span class="etape">1</span> Choisir un ECG</h2>
+      <div class="segments" role="tablist" aria-label="Source de l'ECG">
+        <button role="tab" aria-selected="true" aria-controls="onglet-base" data-onglet="base">Base PTB-XL</button>
+        <button role="tab" aria-selected="false" aria-controls="onglet-fichier" data-onglet="fichier">Importer un fichier</button>
+      </div>
+
+      <div id="onglet-base" class="onglet" role="tabpanel">
+        <p class="aide">ECG de la partition de <b>validation</b> (fold 10), avec leur annotation. La validation a servi au réglage : ces exemples ne mesurent pas la performance. Le test n'est pas proposé, car il a été évalué une seule fois.</p>
+        <div class="filtres">
+          <label class="champ">Classe annotée
+            <select id="filtre-classe"><option value="">Toutes</option></select>
+          </label>
+          <label class="champ">N° d'ECG
+            <input id="recherche" type="search" inputmode="numeric" placeholder="ex. 9" autocomplete="off">
+          </label>
+        </div>
+        <div id="liste-ecg" class="liste-ecg" aria-label="ECG de la validation"></div>
+        <div class="ligne-boutons">
+          <span id="compte" class="discret"></span>
+          <button id="hasard" class="bouton petit" type="button">ECG au hasard</button>
+        </div>
+      </div>
+
+      <div id="onglet-fichier" class="onglet" role="tabpanel" hidden>
+        <label id="depot" class="depot">
+          <input id="fichiers" type="file" multiple accept=".hea,.dat">
+          <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 16V4M7 9l5-5 5 5M4 16v3a1 1 0 0 0 1 1h14a1 1 0 0 0 1-1v-3"/></svg>
+          <b>Déposer les fichiers .hea et .dat</b>
+          <span>ou cliquer pour les choisir</span>
+        </label>
+        <p class="aide">Format attendu : un enregistrement WFDB comme ceux du dossier <code>records500</code> de PTB-XL, avec 12 dérivations (I, II, III, aVR, aVL, aVF, V1 à V6), 500 Hz, 10 s, en mV. Un enregistrement de la partition de test est refusé.</p>
+      </div>
+    </section>
+
+    <section class="carte">
+      <h2><span class="etape">2</span> Choisir le modèle</h2>
+      <p class="aide">Le protocole binaire comprend 5 modèles identiques, entraînés avec 5 graines aléatoires différentes. Chaque modèle utilise un seuil de décision pathologique réglé sur la validation. Les performances affichées sont la moyenne des 5.</p>
+      <div class="ligne-graine"><span>Graine</span><div class="segments" id="choix-graine" role="group" aria-label="Graine du modèle"></div></div>
+    </section>
+
+    <section class="carte fiche-modele" id="fiche-modele">
+      <h2>Le modèle</h2>
+      <div class="chargement">Chargement…</div>
+    </section>
+  </aside>
+
+  <div class="colonne-droite">
+    <section class="carte" id="carte-resultat" aria-live="polite">
+      <h2><span class="etape">3</span> Résultat</h2>
+      <div class="chargement">Chargement du modèle…</div>
+    </section>
+
+    <section class="carte" id="carte-trace">
+      <h2>Tracé <span class="sous-titre" id="trace-titre"></span></h2>
+      <div class="entete-trace">
+        <div class="segments" id="choix-format" role="group" aria-label="Disposition du tracé">
+          <button type="button" aria-pressed="true" data-format="clinique">Format clinique</button>
+          <button type="button" aria-pressed="false" data-format="complet">12 × 10 s</button>
+        </div>
+        <span class="discret" id="echelle-trace"></span>
+      </div>
+      <div class="cadre-trace"><canvas id="trace" aria-label="Tracé ECG 12 dérivations"></canvas></div>
+    </section>
+
+    <section class="carte" id="carte-entrees">
+      <h2>Ce que le réseau reçoit <span class="sous-titre">120 nombres, un par case</span></h2>
+      <p class="aide">Pour chaque dérivation, 10 statistiques sont calculées sur les 10 s du signal, puis centrées et réduites avec la moyenne et l'écart-type du train. La couleur indique de combien d'écarts-types la valeur s'éloigne de la moyenne du train. Survolez une case pour le détail.</p>
+      <div id="carte-chaleur" class="carte-chaleur"></div>
+      <div class="legende-z"><span>−3</span><span class="rampe"></span><span>+3</span><span>valeur normalisée z = (x − moyenne du train) / écart-type du train</span></div>
+    </section>
+  </div>
+</main>
+
+<footer class="pied">
+  Projet académique : classification binaire d'ECG (PTB-XL v1.0.3) par perceptron multicouche. Un ECG avec MI, STTC, CD ou HYP est pathologique, même si NORM est également présent.
+</footer>
+
+<script src="/static/commun.js"></script>
+<script src="/static/utilisation.js"></script>
+</body>
+</html>

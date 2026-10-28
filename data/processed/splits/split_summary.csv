@@ -1,0 +1,4 @@
+partition,folds,n_ecg,n_patients,n_NORM,n_MI,n_STTC,n_CD,n_HYP
+train,"1,2,3,4,5",10692,9263,4764,2729,2624,2443,1317
+validation,10,2158,1877,963,550,521,496,262
+test,6,2129,1860,930,562,528,494,270
